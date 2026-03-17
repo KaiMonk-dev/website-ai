@@ -1,5 +1,6 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import AIOrb from './components/AIOrb'
 import SocialProof from './components/SocialProof'
 import Problem from './components/Problem'
 import BeforeAfter from './components/BeforeAfter'
@@ -17,12 +18,12 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] relative">
+    <div className="min-h-screen bg-[#050508] relative">
       {/* Global background gradient */}
       <div
         className="fixed inset-0 pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(124,58,237,0.12) 0%, transparent 60%)',
+          background: 'radial-gradient(ellipse 80% 50% at 50% 0%, rgba(139,92,246,0.18) 0%, transparent 60%)',
           zIndex: 0,
         }}
       />
@@ -32,6 +33,7 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
+          <AIOrb />
           <SocialProof />
           <Problem />
           <BeforeAfter />

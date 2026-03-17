@@ -43,12 +43,12 @@ export default function Footer() {
       {/* Top gradient line */}
       <div
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, #7c3aed, #3b82f6, #06b6d4, transparent)' }}
+        style={{ background: 'linear-gradient(90deg, transparent, #8b5cf6, #6366f1, #22d3ee, transparent)' }}
       />
 
       <div
         className="py-16 relative"
-        style={{ background: 'linear-gradient(180deg, rgba(124,58,237,0.04) 0%, transparent 100%)' }}
+        style={{ background: 'linear-gradient(180deg, rgba(139,92,246,0.06) 0%, transparent 100%)' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
@@ -57,12 +57,12 @@ export default function Footer() {
               <a href="#" className="flex items-center gap-2 mb-4">
                 <div
                   className="w-9 h-9 rounded-xl flex items-center justify-center"
-                  style={{ background: 'linear-gradient(135deg, #7c3aed, #06b6d4)' }}
+                  style={{ background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)' }}
                 >
                   <Zap className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-lg font-bold text-white">
-                  Ascension <span className="gradient-text">AI</span>
+                  Ascension First <span className="gradient-text">AI</span>
                 </span>
               </a>
               <p className="text-slate-500 text-sm leading-relaxed mb-6">
@@ -106,11 +106,11 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-600 text-sm">
-              © {new Date().getFullYear()} Ascension AI. All rights reserved.
+              © {new Date().getFullYear()} Ascension First AI. All rights reserved.
             </p>
             <p
               className="text-sm font-semibold"
-              style={{ background: 'linear-gradient(135deg, #a855f7, #3b82f6)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
+              style={{ background: 'linear-gradient(135deg, #c084fc, #6366f1, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
             >
               Stop Missing Calls. Start Growing.
             </p>

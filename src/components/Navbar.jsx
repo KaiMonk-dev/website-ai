@@ -24,7 +24,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[#0a0a0f]/90 backdrop-blur-xl border-b border-white/10 py-3'
+          ? 'bg-[#050508]/90 backdrop-blur-xl border-b border-white/10 py-3'
           : 'bg-transparent py-5'
       }`}
     >
@@ -32,11 +32,11 @@ export default function Navbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
-            <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{background: 'linear-gradient(135deg, #7c3aed, #06b6d4)'}}>
+            <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)'}}>
               <Zap className="w-5 h-5 text-white" />
             </div>
             <span className="text-lg font-bold text-white">
-              Ascension <span className="gradient-text">AI</span>
+              Ascension First <span className="gradient-text">AI</span>
             </span>
           </a>
 

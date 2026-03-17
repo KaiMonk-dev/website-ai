@@ -8,30 +8,33 @@ export default {
     extend: {
       colors: {
         brand: {
-          purple: '#7c3aed',
-          'purple-light': '#a855f7',
-          blue: '#3b82f6',
-          cyan: '#06b6d4',
-          dark: '#0a0a0f',
-          'dark-2': '#0f0f1a',
-          'dark-3': '#13131f',
+          purple: '#8b5cf6',
+          'purple-light': '#c084fc',
+          blue: '#6366f1',
+          cyan: '#22d3ee',
+          pink: '#e879f9',
+          dark: '#050508',
+          'dark-2': '#0a0a12',
+          'dark-3': '#0f0f1c',
           glass: 'rgba(255,255,255,0.05)',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
-        'hero-gradient': 'radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,58,237,0.35) 0%, transparent 60%), radial-gradient(ellipse 60% 40% at 80% 50%, rgba(59,130,246,0.2) 0%, transparent 50%), radial-gradient(ellipse 40% 50% at 20% 80%, rgba(6,182,212,0.15) 0%, transparent 50%)',
-        'card-gradient': 'linear-gradient(135deg, rgba(124,58,237,0.1) 0%, rgba(59,130,246,0.05) 100%)',
-        'section-gradient': 'radial-gradient(ellipse 80% 50% at 50% 50%, rgba(124,58,237,0.12) 0%, transparent 70%)',
+        'hero-gradient': 'radial-gradient(ellipse 90% 70% at 50% -10%, rgba(139,92,246,0.5) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 80% 50%, rgba(99,102,241,0.3) 0%, transparent 50%), radial-gradient(ellipse 50% 60% at 20% 80%, rgba(34,211,238,0.2) 0%, transparent 50%), radial-gradient(ellipse 40% 40% at 60% 30%, rgba(232,121,249,0.15) 0%, transparent 50%)',
+        'card-gradient': 'linear-gradient(135deg, rgba(139,92,246,0.12) 0%, rgba(99,102,241,0.06) 100%)',
+        'section-gradient': 'radial-gradient(ellipse 80% 50% at 50% 50%, rgba(139,92,246,0.15) 0%, transparent 70%)',
+        'glow-gradient': 'linear-gradient(135deg, rgba(139,92,246,0.2) 0%, rgba(99,102,241,0.15) 50%, rgba(34,211,238,0.1) 100%)',
       },
       boxShadow: {
-        'neon-purple': '0 0 20px rgba(124,58,237,0.4), 0 0 60px rgba(124,58,237,0.15)',
-        'neon-blue': '0 0 20px rgba(59,130,246,0.4), 0 0 60px rgba(59,130,246,0.15)',
-        'neon-cyan': '0 0 20px rgba(6,182,212,0.4)',
-        'glass': '0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08)',
-        'card-hover': '0 20px 60px rgba(124,58,237,0.25), 0 8px 32px rgba(0,0,0,0.4)',
+        'neon-purple': '0 0 25px rgba(139,92,246,0.6), 0 0 80px rgba(139,92,246,0.2)',
+        'neon-blue': '0 0 25px rgba(99,102,241,0.6), 0 0 80px rgba(99,102,241,0.2)',
+        'neon-cyan': '0 0 25px rgba(34,211,238,0.5)',
+        'neon-pink': '0 0 25px rgba(232,121,249,0.4)',
+        'glass': '0 8px 32px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1)',
+        'card-hover': '0 20px 60px rgba(139,92,246,0.35), 0 8px 32px rgba(0,0,0,0.5)',
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
@@ -40,6 +43,8 @@ export default {
         'fade-in': 'fadeIn 0.8s ease-out',
         'shimmer': 'shimmer 2s linear infinite',
         'spin-slow': 'spin 8s linear infinite',
+        'orb-ring': 'orbRing 3s ease-out infinite',
+        'chip-float': 'chipFloat 4s ease-in-out infinite',
       },
       keyframes: {
         float: {
@@ -47,8 +52,8 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(124,58,237,0.4)' },
-          '50%': { boxShadow: '0 0 40px rgba(124,58,237,0.8), 0 0 80px rgba(124,58,237,0.3)' },
+          '0%, 100%': { boxShadow: '0 0 30px rgba(139,92,246,0.5), 0 0 60px rgba(139,92,246,0.2)' },
+          '50%': { boxShadow: '0 0 60px rgba(139,92,246,0.9), 0 0 120px rgba(99,102,241,0.4), 0 0 180px rgba(34,211,238,0.2)' },
         },
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(30px)' },
@@ -61,6 +66,15 @@ export default {
         shimmer: {
           '0%': { backgroundPosition: '-200% center' },
           '100%': { backgroundPosition: '200% center' },
+        },
+        orbRing: {
+          '0%':   { transform: 'scale(1)',   opacity: '0.6' },
+          '100%': { transform: 'scale(2.8)', opacity: '0' },
+        },
+        chipFloat: {
+          '0%, 10%':   { opacity: '0', transform: 'translateY(8px)' },
+          '20%, 80%':  { opacity: '1', transform: 'translateY(0px)' },
+          '90%, 100%': { opacity: '0', transform: 'translateY(-8px)' },
         },
       },
     },
