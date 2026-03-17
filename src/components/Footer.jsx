@@ -62,7 +62,7 @@ export default function Footer() {
                   <Zap className="w-5 h-5 text-white" />
                 </div>
                 <span className="text-lg font-bold text-white">
-                  Ascension <span className="gradient-text">First AI</span>
+                  Ascension <span className="gradient-text">AI</span>
                 </span>
               </a>
               <p className="text-slate-500 text-sm leading-relaxed mb-6">
@@ -106,7 +106,7 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-600 text-sm">
-              © {new Date().getFullYear()} Ascension First AI. All rights reserved.
+              © {new Date().getFullYear()} Ascension AI. All rights reserved.
             </p>
             <p
               className="text-sm font-semibold"

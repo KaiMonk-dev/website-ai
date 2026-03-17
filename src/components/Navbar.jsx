@@ -36,7 +36,7 @@ export default function Navbar() {
               <Zap className="w-5 h-5 text-white" />
             </div>
             <span className="text-lg font-bold text-white">
-              Ascension <span className="gradient-text">First AI</span>
+              Ascension <span className="gradient-text">AI</span>
             </span>
           </a>
 
