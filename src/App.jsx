@@ -1,6 +1,5 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import AIOrb from './components/AIOrb'
 import SocialProof from './components/SocialProof'
 import Problem from './components/Problem'
 import BeforeAfter from './components/BeforeAfter'
@@ -33,7 +32,6 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
-          <AIOrb />
           <SocialProof />
           <Problem />
           <BeforeAfter />

@@ -46,7 +46,7 @@ export default function Process() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6 text-sm text-blue-400">
             <Rocket className="w-4 h-4" />
             How It Works
@@ -58,6 +58,44 @@ export default function Process() {
           <p className="section-subtitle">
             We handle everything. You just show up for the strategy call and watch your business transform.
           </p>
+        </div>
+
+        {/* Vimeo video embed */}
+        <div className="max-w-4xl mx-auto mb-20">
+          <div
+            className="glass-card overflow-hidden p-1.5 relative"
+            style={{
+              borderColor: 'rgba(139,92,246,0.35)',
+              boxShadow: '0 0 60px rgba(139,92,246,0.2), 0 0 120px rgba(99,102,241,0.1)',
+            }}
+          >
+            {/* Top gradient bar */}
+            <div
+              className="absolute top-0 left-0 right-0 h-px z-10"
+              style={{
+                background: 'linear-gradient(90deg, transparent, #8b5cf6, #22d3ee, transparent)',
+              }}
+            />
+            <div
+              className="rounded-xl overflow-hidden"
+              style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}
+            >
+              <iframe
+                src="https://player.vimeo.com/video/1156355064?badge=0&autopause=0&player_id=0&app_id=58479"
+                frameBorder="0"
+                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
+                allowFullScreen
+                title="See How Ascension First AI Works"
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </div>
+          </div>
         </div>
 
         {/* Steps */}
