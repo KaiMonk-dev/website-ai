@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { Search, Settings, Rocket, TrendingUp } from 'lucide-react'
 
 const steps = [
@@ -40,6 +41,24 @@ const steps = [
 ]
 
 export default function Process() {
+  const iframeRef = useRef(null)
+  const [ended, setEnded] = useState(false)
+
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://player.vimeo.com/api/player.js'
+    script.async = true
+    script.onload = () => {
+      if (!iframeRef.current) return
+      // eslint-disable-next-line no-undef
+      const player = new Vimeo.Player(iframeRef.current)
+      player.on('ended', () => setEnded(true))
+      player.on('play', () => setEnded(false))
+    }
+    document.body.appendChild(script)
+    return () => { document.body.removeChild(script) }
+  }, [])
+
   return (
     <section id="how-it-works" className="py-24 relative overflow-hidden">
       <div className="glow-orb w-[500px] h-[500px] bg-blue-600/10 bottom-0 right-0" />
@@ -81,6 +100,7 @@ export default function Process() {
               style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}
             >
               <iframe
+                ref={iframeRef}
                 src="https://player.vimeo.com/video/1156355064?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&share=0&end_screen=0"
                 frameBorder="0"
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
@@ -94,6 +114,19 @@ export default function Process() {
                   height: '100%',
                 }}
               />
+              {ended && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background: '#050508',
+                    zIndex: 10,
+                  }}
+                />
+              )}
             </div>
           </div>
         </div>
