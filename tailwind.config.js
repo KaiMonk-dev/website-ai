@@ -20,7 +20,8 @@ export default {
         }
       },
       fontFamily: {
-        sans: ['Space Grotesk', 'system-ui', 'sans-serif'],
+        sans: ['Rajdhani', 'system-ui', 'sans-serif'],
+        display: ['Orbitron', 'system-ui', 'sans-serif'],
       },
       backgroundImage: {
         'hero-gradient': 'radial-gradient(ellipse 90% 70% at 50% -10%, rgba(139,92,246,0.5) 0%, transparent 60%), radial-gradient(ellipse 70% 50% at 80% 50%, rgba(99,102,241,0.3) 0%, transparent 50%), radial-gradient(ellipse 50% 60% at 20% 80%, rgba(34,211,238,0.2) 0%, transparent 50%), radial-gradient(ellipse 40% 40% at 60% 30%, rgba(232,121,249,0.15) 0%, transparent 50%)',
