@@ -81,7 +81,7 @@ export default function Process() {
               style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}
             >
               <iframe
-                src="https://player.vimeo.com/video/1156355064?badge=0&autopause=0&player_id=0&app_id=58479"
+                src="https://player.vimeo.com/video/1156355064?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&share=0"
                 frameBorder="0"
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                 allowFullScreen

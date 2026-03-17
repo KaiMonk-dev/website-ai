@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { Play, ArrowRight, Star, Users, TrendingUp, Phone, Calendar, CheckCircle, MessageSquare } from 'lucide-react'
 
 const stats = [
-  { value: '500+', label: 'Businesses Served', icon: Users },
-  { value: '98%',  label: 'Client Retention',  icon: TrendingUp },
-  { value: '4.9/5',label: 'Rating',             icon: Star },
+  { value: '500+', label: 'Businesses Served', icon: Users,      color: '#22d3ee', bg: 'rgba(34,211,238,0.15)',  border: 'rgba(34,211,238,0.35)',  glow: 'rgba(34,211,238,0.25)'  },
+  { value: '98%',  label: 'Client Retention',  icon: TrendingUp, color: '#34d399', bg: 'rgba(52,211,153,0.15)',  border: 'rgba(52,211,153,0.35)',  glow: 'rgba(52,211,153,0.25)'  },
+  { value: '4.9/5',label: 'Rating',             icon: Star,       color: '#fbbf24', bg: 'rgba(251,191,36,0.15)',  border: 'rgba(251,191,36,0.35)',  glow: 'rgba(251,191,36,0.25)'  },
 ]
 
 const activities = [
@@ -102,10 +102,21 @@ export default function Hero() {
 
             {/* Stats */}
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              {stats.map(({ value, label, icon: Icon }) => (
-                <div key={label} className="glass-card px-5 py-4 flex items-center gap-3">
-                  <div className="feature-icon w-10 h-10">
-                    <Icon className="w-4 h-4 text-violet-400" />
+              {stats.map(({ value, label, icon: Icon, color, bg, border, glow }) => (
+                <div
+                  key={label}
+                  className="glass-card px-5 py-4 flex items-center gap-3"
+                  style={{ borderColor: border }}
+                >
+                  <div
+                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
+                    style={{
+                      background: bg,
+                      border: `1px solid ${border}`,
+                      boxShadow: `0 0 12px ${glow}`,
+                    }}
+                  >
+                    <Icon className="w-4 h-4" style={{ color }} />
                   </div>
                   <div className="text-left">
                     <div className="text-xl font-bold text-white">{value}</div>
