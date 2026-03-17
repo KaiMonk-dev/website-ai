@@ -1,13 +1,10 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import SocialProof from './components/SocialProof'
 import Problem from './components/Problem'
 import BeforeAfter from './components/BeforeAfter'
 import Demo from './components/Demo'
 import Features from './components/Features'
-import AudioDemo from './components/AudioDemo'
 import Process from './components/Process'
-import Industries from './components/Industries'
 import ROICalculator from './components/ROICalculator'
 import Pricing from './components/Pricing'
 import Testimonials from './components/Testimonials'
@@ -32,14 +29,11 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
-          <SocialProof />
           <Problem />
           <BeforeAfter />
           <Demo />
           <Features />
-          <AudioDemo />
           <Process />
-          <Industries />
           <ROICalculator />
           <Pricing />
           <Testimonials />
