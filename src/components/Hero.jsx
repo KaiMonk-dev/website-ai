@@ -93,6 +93,9 @@ export default function Hero() {
               <a href="#contact" className="neon-btn flex items-center justify-center gap-2">
                 Book a Free Demo Call
               </a>
+              <a href="/demo.html" className="neon-btn flex items-center justify-center gap-2" style={{background:'linear-gradient(135deg,#06d6a0,#059669)',borderColor:'#06d6a0'}}>
+                See Your Free Demo
+              </a>
               <a href="#how-it-works" className="outline-btn flex items-center justify-center gap-2">
                 <Play className="w-4 h-4 fill-white flex-shrink-0" />
                 See How It Works
