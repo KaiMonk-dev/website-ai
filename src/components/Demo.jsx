@@ -48,7 +48,7 @@ export default function Demo() {
 
             {/* Phone number */}
             <a
-              href="tel:+15551234567"
+              href="tel:+16193337864"
               className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-2xl font-bold text-white mb-12 transition-all duration-300 hover:scale-105"
               style={{
                 background: 'linear-gradient(135deg, #7c3aed, #3b82f6)',
@@ -63,7 +63,7 @@ export default function Demo() {
                 />
                 <Phone className="relative w-7 h-7" />
               </div>
-              +1 (555) 123-4567
+              +1 (619) 333-7864
             </a>
 
             {/* Steps */}
