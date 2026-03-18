@@ -15,7 +15,7 @@ const activities = [
 ]
 
 // Ring diameters — small enough that corner chips (22px inset) are always clear
-const ringSizes = [110, 175, 240, 30
+const ringSizes = [110, 175, 240, 305]
 
 // Chips in the 4 corners of the 560×520 container (~230px from orb center)
 const cornerPositions = [
