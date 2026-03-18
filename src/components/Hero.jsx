@@ -9,13 +9,13 @@ const stats = [
 
 const activities = [
   { icon: Phone,         label: 'Call Answered',       color: '#22d3ee', delay: '0s' },
-  { icon: Calendar,      label: 'Appointment Booked',  color: '#c084fc', delay: '1s' },
+  { icon: Calendar,      label: 'Appontment Booked',  color: '#c084fc', delay: '1s' },
   { icon: CheckCircle,   label: 'Lead Captured',       color: '#34d399', delay: '2s' },
   { icon: MessageSquare, label: 'SMS Follow-up Sent',  color: '#f472b6', delay: '3s' },
 ]
 
 // Ring diameters — small enough that corner chips (22px inset) are always clear
-const ringSizes = [110, 175, 240, 305]
+const ringSizes = [110, 175, 240, 30
 
 // Chips in the 4 corners of the 560×520 container (~230px from orb center)
 const cornerPositions = [
@@ -92,6 +92,9 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
               <a href="#contact" className="neon-btn flex items-center justify-center gap-2">
                 Book a Free Demo Call
+              </a>
+              <a href="/demo.html" className="neon-btn flex items-center justify-center gap-2" style={{background:'linear-gradient(135deg,#06d6a0,#059669)',borderColor:'#06d6a0'}}>
+                See Your Free Demo
               </a>
               <a href="#how-it-works" className="outline-btn flex items-center justify-center gap-2">
                 <Play className="w-4 h-4 fill-white flex-shrink-0" />
