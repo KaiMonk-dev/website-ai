@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ascension First AI — Live Demo</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0814;color:#e5e7eb;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;padding:24px 16px}
+.wrap{max-width:680px;margin:0 auto}
+
+/* Brand */
+:root{--p:#7c3aed;--pl:#a78bfa;--t:#06d6a0;--td:#059669;--bg:#0d0b1a;--card:#16102e;--bdr:#2a1f5c}
+
+/* Header */
+.hdr{background:var(--bg);border:1px solid var(--bdr);border-radius:14px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:34px;height:34px;background:var(--p);border-radius:9px;display:flex;align-items:center;justify-content:center}
+.logo-name{font-size:15px;font-weight:600;color:#fff}
+.logo-name span{color:var(--pl)}
+.live-badge{background:#0f2a1e;border:1px solid var(--td);color:var(--t);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;display:flex;align-items:center;gap:5px}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--t);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Progress */
+.prog-wrap{display:flex;gap:4px;margin-bottom:16px;align-items:center}
+.prog-seg{flex:1;height:3px;border-radius:2px;background:#2a1f5c;transition:background .3s}
+.prog-seg.done{background:var(--t)}
+.prog-seg.active{background:var(--p)}
+.prog-txt{font-size:11px;color:#4b5563;min-width:32px;text-align:right}
+
+/* Scene */
+.scene{display:none}.scene.active{display:block}
+.s-hdr{text-align:center;margin-bottom:20px}
+.badge{display:inline-block;background:#1a1040;border:1px solid var(--bdr);color:var(--pl);font-size:11px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:10px;letter-spacing:.06em;text-transform:uppercase}
+.s-hdr h2{font-size:22px;font-weight:700;color:#fff;margin-bottom:6px;line-height:1.3}
+.s-hdr p{font-size:14px;color:#9ca3af;line-height:1.6}
+
+/* Inputs */
+.niche-wrap{margin-bottom:16px}
+.niche-wrap label,.slide-row label{font-size:13px;color:#9ca3af;display:block;margin-bottom:6px}
+select{width:100%;padding:11px 14px;font-size:15px;border-radius:10px;border:1px solid var(--bdr);background:#0d0b1a;color:#e5e7eb;outline:none}
+.slide-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.slide-row label{min-width:148px;margin:0}
+.slide-row span{font-size:13px;font-weight:600;color:var(--t);min-width:62px;text-align:right}
+input[type=range]{flex:1;accent-color:var(--p);height:4px}
+
+/* Phone */
+.phone-box{background:var(--bg);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:12px}
+.phone-lbl{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#4b5563;margin-bottom:14px}
+.msg{display:flex;gap:10px;margin-bottom:10px;align-items:flex-start}
+.av{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
+.av-c{background:#1e3a5f;color:#60a5fa}
+.av-ai{background:#3b1f7a;color:#a78bfa}
+.av-vm{background:#3b1111;color:#f87171}
+.bub{padding:10px 14px;border-radius:14px;font-size:14px;line-height:1.5;max-width:80%}
+.bub-c{background:#1a1f2e;border:1px solid #2d3748;color:#e5e7eb}
+.bub-ai{background:#1e1245;border:1px solid #3b1f7a;color:#c4b5fd}
+.bub-vm{background:#1f0e0e;border:1px solid #4b1111;color:#f87171}
+.bub-sys{background:#0d2318;border:1px solid #065f46;color:#34d399;font-size:13px;margin-left:auto}
+.typing-dots{display:flex;gap:4px;align-items:center;padding:10px 14px;background:#1e1245;border:1px solid #3b1f7a;border-radius:14px}
+.typing-dots span{width:6px;height:6px;border-radius:50%;background:#7c3aed;animation:blink 1.2s infinite}
+.typing-dots span:nth-child(2){animation-delay:.2s}
+.typing-dots span:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,100%{opacity:.2}50%{opacity:1}}
+
+/* Banners */
+.loss-banner,.win-banner{border-radius:12px;padding:14px 18px;margin-bottom:12px;display:flex;align-items:center;gap:14px}
+.loss-banner{background:#1f0e0e;border:1px solid #4b1111}
+.win-banner{background:#0d2318;border:1px solid #065f46}
+.banner-icon{font-size:22px;flex-shrink:0}
+.banner-lbl{font-size:12px;color:#9ca3af;margin-bottom:2px}
+.banner-amt{font-size:18px;font-weight:700}
+.loss-banner .banner-amt{color:#f87171}
+.win-banner .banner-amt{color:#34d399}
+
+/* Stats */
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.stat-card{background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:14px;text-align:center}
+.stat-num{font-size:22px;font-weight:700;margin-bottom:2px}
+.stat-lbl{font-size:11px;color:#6b7280}
+
+/* Pills */
+.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.pill{font-size:12px;font-weight:600;padding:5px 13px;border-radius:20px}
+.pill-g{background:#0d2318;border:1px solid #065f46;color:#34d399}
+.pill-p{background:#1e1245;border:1px solid #3b1f7a;color:#a78bfa}
+
+/* ROI */
+.roi-card{background:var(--bg);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:12px}
+.roi-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--bdr);font-size:14px}
+.roi-row:last-child{border-bottom:none;font-weight:700;font-size:16px;padding-top:14px}
+.roi-lbl{color:#9ca3af}
+.rv{color:#e5e7eb}.rg{color:#34d399}.rr{color:#f87171}
+
+/* Features */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.feat{background:var(--bg);border:1px solid var(--bdr);border-radius:10px;padding:10px 14px;font-size:13px;color:#9ca3af;display:flex;align-items:center;gap:8px}
+.feat-ck{color:var(--t);font-weight:700}
+
+/* Review scene */
+.review-card{background:var(--bg);border:1px solid var(--bdr);border-radius:14px;padding:18px;margin-bottom:12px}
+.ai-sms{background:#1e1245;border:1px solid #3b1f7a;border-radius:12px;padding:14px 16px;margin-bottom:12px;font-size:14px;color:#c4b5fd;line-height:1.6}
+.stars{color:#f59e0b;font-size:20px;margin-bottom:8px}
+
+/* Call demo */
+.call-card{background:var(--bg);border:2px solid var(--td);border-radius:16px;padding:24px;margin-bottom:12px;text-align:center}
+.call-num{font-size:32px;font-weight:700;color:var(--t);margin:10px 0;letter-spacing:.04em;font-family:monospace}
+.call-btn{display:inline-flex;align-items:center;gap:10px;background:var(--t);color:#041f14;font-size:16px;font-weight:700;padding:14px 32px;border-radius:12px;text-decoration:none;margin:10px 0}
+.call-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.cs{background:#0d2318;border:1px solid #065f46;border-radius:10px;padding:10px 6px;text-align:center}
+.cs-n{font-size:20px;font-weight:700;color:var(--t);margin-bottom:4px}
+.cs-l{font-size:11px;color:#6b7280;line-height:1.4}
+
+/* Book card */
+.book-card{background:linear-gradient(135deg,#1a1040,#0a1525);border:1px solid var(--p);border-radius:16px;padding:24px;text-align:center;margin-bottom:12px}
+.book-card h3{font-size:20px;font-weight:700;color:#fff;margin-bottom:8px}
+.book-card p{font-size:14px;color:#9ca3af;margin-bottom:18px;line-height:1.6}
+.book-feats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:18px}
+.bf{background:#1a1040;border:1px solid var(--bdr);color:var(--pl);font-size:12px;font-weight:600;padding:5px 14px;border-radius:20px}
+.book-btn{display:inline-flex;align-items:center;gap:10px;background:var(--p);color:#fff;font-size:15px;font-weight:700;padding:14px 30px;border-radius:12px;text-decoration:none;margin-bottom:8px}
+.book-btn:hover{background:#6d28d9}
+
+/* Nav */
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;gap:10px;flex-wrap:wrap}
+button{padding:10px 20px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--bdr);background:transparent;color:#9ca3af;transition:all .15s}
+button:hover{background:#1a1040;color:#e5e7eb}
+.btn-p{background:var(--p);border-color:var(--p);color:#fff}
+.btn-p:hover{background:#6d28d9}
+.btn-t{background:var(--t);border-color:var(--t);color:#041f14}
+.btn-t:hover{background:#34d399}
+
+.note{font-size:12px;color:#4b5563;margin-top:10px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- Header -->
+<div class="hdr">
+  <div class="logo">
+    <div class="logo-icon">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#a78bfa"/></svg>
+    </div>
+    <div class="logo-name">Ascension First <span>AI</span></div>
+  </div>
+  <div class="live-badge"><div class="live-dot"></div> Live Demo</div>
+</div>
+
+<!-- Progress bar -->
+<div class="prog-wrap">
+  <div class="prog-seg active" id="p0"></div>
+  <div class="prog-seg" id="p1"></div>
+  <div class="prog-seg" id="p2"></div>
+  <div class="prog-seg" id="p3"></div>
+  <div class="prog-seg" id="p4"></div>
+  <div class="prog-seg" id="p5"></div>
+  <span class="prog-txt" id="prog-lbl">1/6</span>
+</div>
+
+<!-- SCENE 0: Setup -->
+<div class="scene active" id="sc0">
+  <div class="s-hdr">
+    <div class="badge">Personalized Demo</div>
+    <h2>Let's make this about your business</h2>
+    <p>Pick your industry and adjust the sliders — we'll show you the exact impact on your revenue.</p>
+  </div>
+  <div class="niche-wrap">
+    <label>What type of business do you run?</label>
+    <select id="niche">
+      <option value="medspa">Med Spa / Aesthetic Clinic</option>
+      <option value="chiro">Chiropractic / Physical Therapy</option>
+      <option value="dental">Dental Practice</option>
+      <option value="law">Law Firm</option>
+      <option value="hvac">HVAC / Home Services</option>
+      <option value="other">Other Local Business</option>
+    </select>
+  </div>
+  <div class="slide-row">
+    <label>Calls you get per day</label>
+    <input type="range" min="3" max="40" value="10" step="1" id="cpd">
+    <span id="cpd-out">10</span>
+  </div>
+  <div class="slide-row">
+    <label>Average client value ($)</label>
+    <input type="range" min="100" max="5000" value="400" step="50" id="acv">
+    <span id="acv-out">$400</span>
+  </div>
+  <div class="slide-row">
+    <label>Calls currently missed (%)</label>
+    <input type="range" min="10" max="70" value="30" step="5" id="mr">
+    <span id="mr-out">30%</span>
+  </div>
+  <div class="nav" style="justify-content:flex-end">
+    <button class="btn-p" onclick="go(1)">See what you're losing →</button>
+  </div>
+</div>
+
+<!-- SCENE 1: Without AI -->
+<div class="scene" id="sc1">
+  <div class="s-hdr">
+    <div class="badge">The Problem</div>
+    <h2>Without the AI — right now</h2>
+    <p>Every missed call is a real person choosing your competitor over you.</p>
+  </div>
+  <div class="phone-box">
+    <div class="phone-lbl" id="s1-lbl">Caller → your business</div>
+    <div class="msg"><div class="av av-c">C</div><div class="bub bub-c" id="s1-q">Hi, I'd love to book a Botox consultation — do you have availability this week?</div></div>
+    <div class="msg"><div class="av av-vm">VM</div><div class="bub bub-vm">You've reached us! We can't take your call right now. Please leave a message...</div></div>
+    <div class="msg"><div class="av av-c">C</div><div class="bub bub-vm"><em>[Hangs up. Calls your competitor.]</em></div></div>
+  </div>
+  <div class="loss-banner">
+    <div class="banner-icon">💸</div>
+    <div><div class="banner-lbl">That one call just cost you</div><div class="banner-amt" id="s1-one">$400 in lost revenue</div></div>
+  </div>
+  <div class="stat-grid">
+    <div class="stat-card"><div class="stat-num" id="s1-miss" style="color:#f87171">3</div><div class="stat-lbl">missed calls / day</div></div>
+    <div class="stat-card"><div class="stat-num" id="s1-daily" style="color:#f87171">$1,200</div><div class="stat-lbl">lost today</div></div>
+    <div class="stat-card"><div class="stat-num" id="s1-ann" style="color:#f87171">$288K</div><div class="stat-lbl">lost per year</div></div>
+  </div>
+  <p style="font-size:13px;color:#6b7280;margin-bottom:6px">62% of callers who hit voicemail never call back. They call whoever answered first.</p>
+  <div class="nav"><button onclick="go(0)">← Back</button><button class="btn-p" onclick="go(2)">See it solved →</button></div>
+</div>
+
+<!-- SCENE 2: With AI -->
+<div class="scene" id="sc2">
+  <div class="s-hdr">
+    <div class="badge">The Solution</div>
+    <h2>With your AI receptionist — every call</h2>
+    <p>Answers in under 1 second. Books the appointment. You get notified. Done.</p>
+  </div>
+  <div class="phone-box">
+    <div class="phone-lbl">Caller → Your AI (live, 24/7)</div>
+    <div class="msg"><div class="av av-c">C</div><div class="bub bub-c" id="s2-q">Hi, I'd love to book a consultation — do you have availability this week?</div></div>
+    <div class="msg" id="t1"><div class="av av-ai">AI</div><div class="typing-dots"><span></span><span></span><span></span></div></div>
+    <div class="msg" id="a1" style="display:none"><div class="av av-ai">AI</div><div class="bub bub-ai" id="s2-a1">Hi! Thanks for calling. I'd love to get you booked. I have Tuesday at 2pm or Thursday at 11am open — which works better for you?</div></div>
+    <div class="msg" id="c1" style="display:none"><div class="av av-c">C</div><div class="bub bub-c">Thursday at 11 works great!</div></div>
+    <div class="msg" id="a2" style="display:none"><div class="av av-ai">AI</div><div class="bub bub-ai">Perfect — can I get your name and best number to send a confirmation text?</div></div>
+    <div class="msg" id="c2" style="display:none"><div class="av av-c">C</div><div class="bub bub-c">Sarah, (858) 555-0182.</div></div>
+    <div class="msg" id="a3" style="display:none"><div class="av av-ai">AI</div><div class="bub bub-ai" id="s2-a3">You're all set, Sarah! Confirmation sent. We'll also send a reminder the day before. See you Thursday!</div></div>
+    <div class="msg" id="sys1" style="display:none;justify-content:flex-end"><div class="bub bub-sys">Appointment booked + SMS sent to client</div></div>
+  </div>
+  <div id="s2-pills" style="display:none" class="pill-row">
+    <div class="pill pill-g">Answered instantly</div>
+    <div class="pill pill-g">Appointment booked</div>
+    <div class="pill pill-p">SMS sent to client</div>
+    <div class="pill pill-p">You get notified</div>
+  </div>
+  <div class="win-banner" id="s2-win" style="display:none">
+    <div class="banner-icon">✓</div>
+    <div><div class="banner-lbl">Revenue recovered — this one call</div><div class="banner-amt" id="s2-won">$400 saved</div></div>
+  </div>
+  <div class="nav"><button onclick="go(1)">← Back</button><button class="btn-p" id="s2-next" onclick="go(3)" style="display:none">See your ROI →</button></div>
+</div>
+
+<!-- SCENE 3: ROI -->
+<div class="scene" id="sc3">
+  <div class="s-hdr">
+    <div class="badge">Your Numbers</div>
+    <h2>Your return on investment</h2>
+    <p>Based on what you told us — here's your monthly and annual impact.</p>
+  </div>
+  <div class="roi-card">
+    <div class="roi-row"><span class="roi-lbl">Missed calls recovered / month</span><span class="rv" id="r-miss">—</span></div>
+    <div class="roi-row"><span class="roi-lbl">Revenue recovered / month</span><span class="rg" id="r-rev">—</span></div>
+    <div class="roi-row"><span class="roi-lbl">Cost of Ascension First AI</span><span class="rr">$497 / mo</span></div>
+    <div class="roi-row"><span class="roi-lbl">Net gain every month</span><span class="rg" id="r-net">—</span></div>
+    <div class="roi-row"><span class="roi-lbl" style="font-weight:700">Annual revenue impact</span><span class="rg" id="r-ann" style="font-size:18px">—</span></div>
+  </div>
+  <div class="feat-grid">
+    <div class="feat"><span class="feat-ck">✓</span>100% of calls answered</div>
+    <div class="feat"><span class="feat-ck">✓</span>Books appointments 24/7</div>
+    <div class="feat"><span class="feat-ck">✓</span>SMS follow-ups sent</div>
+    <div class="feat"><span class="feat-ck">✓</span>Trained to your business</div>
+    <div class="feat"><span class="feat-ck">✓</span>Live in 72 hours</div>
+    <div class="feat"><span class="feat-ck">✓</span>No contracts, cancel anytime</div>
+  </div>
+  <div class="nav"><button onclick="go(2)">← Back</button><button class="btn-p" onclick="go(4)">And there's more →</button></div>
+</div>
+
+<!-- SCENE 4: Reviews -->
+<div class="scene" id="sc4">
+  <div class="s-hdr">
+    <div class="badge">Bonus Feature</div>
+    <h2>Your AI also grows your Google reviews</h2>
+    <p>More 5-star reviews = higher Google ranking = more people finding you without spending on ads.</p>
+  </div>
+  <div class="review-card">
+    <div class="phone-lbl">After every appointment, your AI follows up automatically</div>
+    <div class="ai-sms">Hi Sarah! This is Alex from <strong id="rv-biz" style="color:#a78bfa">your business</strong>. How did your appointment go? If we took great care of you, we'd love it if you took 30 seconds to leave a Google review — it helps people in the community find us! <span style="color:#06d6a0">→ [your Google review link]</span></div>
+    <p style="font-size:13px;color:#6b7280;margin-bottom:14px">This goes out automatically after every visit — zero effort from you, ever.</p>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num" style="color:var(--t)">+12</div><div class="stat-lbl">avg new reviews / mo</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:var(--t)">#1–3</div><div class="stat-lbl">Google Maps ranking</div></div>
+      <div class="stat-card"><div class="stat-num" style="color:var(--t)">Free</div><div class="stat-lbl">included in plan</div></div>
+    </div>
+    <div style="background:#0a0814;border:1px solid var(--bdr);border-radius:10px;padding:14px;margin-top:4px">
+      <div class="stars">★★★★★</div>
+      <div style="font-size:13px;color:#9ca3af;line-height:1.7">
+        <strong style="color:#e5e7eb">Most people Google you first</strong> — reviews decide who they call.<br>
+        <strong style="color:#e5e7eb">More reviews</strong> = higher position in Google Maps results.<br>
+        <strong style="color:#e5e7eb">Higher position</strong> = more calls, more clients, more revenue.<br>
+        <span style="color:#4b5563;font-size:12px">Your competitors didn't ask manually — they automated it.</span>
+      </div>
+    </div>
+  </div>
+  <div class="nav"><button onclick="go(3)">← Back</button><button class="btn-p" onclick="go(5)">Try the AI live →</button></div>
+</div>
+
+<!-- SCENE 5: Call + Book -->
+<div class="scene" id="sc5">
+  <div class="s-hdr">
+    <div class="badge">Hear It Yourself</div>
+    <h2>Call the AI right now</h2>
+    <p>This is a live AI receptionist. Ask it anything. Experience exactly what your customers will hear.</p>
+  </div>
+  <div class="call-card">
+    <p style="font-size:13px;color:#6b7280">Call this number from your phone</p>
+    <div class="call-num">619-333-7864</div>
+    <a href="tel:6193337864" class="call-btn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1-9.4 0-17-7.6-17-17 0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8z"/></svg>
+      Tap to call the AI
+    </a>
+    <div class="call-steps">
+      <div class="cs"><div class="cs-n">01</div><div class="cs-l">Call the number</div></div>
+      <div class="cs"><div class="cs-n">02</div><div class="cs-l">AI answers instantly</div></div>
+      <div class="cs"><div class="cs-n">03</div><div class="cs-l">Ask it anything</div></div>
+      <div class="cs"><div class="cs-n">04</div><div class="cs-l">Book a call live</div></div>
+    </div>
+    <p class="note">Demo agent. Your own AI will be trained specifically for your business.</p>
+  </div>
+
+  <div style="border-top:1px solid var(--bdr);padding-top:18px">
+    <div class="book-card">
+      <h3>Ready to set this up for your business?</h3>
+      <p>Book a free 30-minute strategy call. We'll show you a custom demo, walk through setup, and give you a clear plan — zero pressure.</p>
+      <div class="book-feats">
+        <div class="bf">Free 30-min call</div>
+        <div class="bf">Custom live demo</div>
+        <div class="bf">Clear pricing</div>
+        <div class="bf">Live in 72 hrs</div>
+        <div class="bf">No contracts</div>
+      </div>
+      <a href="YOUR_BOOKING_LINK_HERE" class="book-btn" id="book-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zm0-12H5V6h14v2z"/></svg>
+        Book my free strategy call
+      </a>
+      <p class="note">Or call the AI above — it will book you directly on the calendar</p>
+    </div>
+  </div>
+
+  <div class="nav"><button onclick="go(4)">← Back</button><button class="btn-p" onclick="go(0)">Start over</button></div>
+</div>
+
+</div><!-- end wrap -->
+
+<script>
+const N={
+  medspa:{biz:"Mira Mesa Med Spa",q:"Hi, I'd love to book a Botox consultation — do you have availability this week?",a1:"Hi! Thanks for calling. I'd love to get you scheduled. I have Tuesday at 2pm or Thursday at 11am open — which works better?",a3:"You're all set, Sarah! Confirmation sent and a reminder the day before. We'll see you Thursday!"},
+  chiro:{biz:"Your Chiro Clinic",q:"Hey, I've been having back pain for a few weeks — can I schedule a new patient visit?",a1:"Hi! Thanks for calling. We'd love to help. I have a new patient slot Wednesday at 10am or Friday at 3pm — which works for you?",a3:"Perfect! New patient visit confirmed. We'll send intake forms to complete before your visit. See you then!"},
+  dental:{biz:"Your Dental Practice",q:"Hi, I need a cleaning and I'm wondering if you're taking new patients?",a1:"Hi! Great news — we are! I can get you in for a cleaning and exam Tuesday at 9am or Thursday at 2pm. Which works?",a3:"You're booked! Confirmation on its way and we'll send new patient paperwork ahead of your visit. See you soon!"},
+  law:{biz:"Your Law Firm",q:"I was in an accident yesterday and I need to speak with someone about my case urgently.",a1:"Hi — I'm sorry to hear that. We can absolutely help. I have a free consultation open tomorrow at 10am or this afternoon at 4pm. Which is better?",a3:"Confirmed. An attorney will call to verify details before your consultation. You're in good hands."},
+  hvac:{biz:"Your HVAC Company",q:"My AC stopped working this morning — can anyone come out today?",a1:"Hi! We'll get someone out today. I have a technician available this afternoon between 2 and 5pm. Does that work for you?",a3:"Booked! A technician is scheduled for this afternoon. You'll get a text with their name and ETA when they're on the way."},
+  other:{biz:"Your Business",q:"Hi, I found you online and I'm interested in your services. Can someone help?",a1:"Hi! Thanks for reaching out. I'd love to get you scheduled for a quick consultation. We have availability tomorrow morning or Thursday afternoon — which works?",a3:"You're all set! Confirmation is on its way. Looking forward to working with you!"}
+};
+
+function vals(){return{c:+document.getElementById('cpd').value,v:+document.getElementById('acv').value,m:+document.getElementById('mr').value/100};}
+function fmt(n){return'$'+Math.round(n).toLocaleString();}
+document.getElementById('cpd').oninput=function(){document.getElementById('cpd-out').textContent=this.value;};
+document.getElementById('acv').oninput=function(){document.getElementById('acv-out').textContent='$'+this.value;};
+document.getElementById('mr').oninput=function(){document.getElementById('mr-out').textContent=this.value+'%';};
+
+let s2done=false;
+function show(id){const e=document.getElementById(id);if(e)e.style.display='flex';}
+
+function go(n){
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  for(let i=0;i<6;i++){document.getElementById('p'+i).className='prog-seg'+(i<n?' done':i===n?' active':'');}
+  document.getElementById('prog-lbl').textContent=(n+1)+'/6';
+  document.getElementById('sc'+n).classList.add('active');
+  window.scrollTo(0,0);
+
+  if(n===1){
+    const {c,v,m}=vals(),nd=N[document.getElementById('niche').value];
+    const missed=Math.round(c*m),daily=missed*v,ann=daily*240;
+    document.getElementById('s1-lbl').textContent='Caller → '+nd.biz;
+    document.getElementById('s1-q').textContent=nd.q;
+    document.getElementById('s1-one').textContent=fmt(v)+' in lost revenue';
+    document.getElementById('s1-miss').textContent=missed;
+    document.getElementById('s1-daily').textContent=fmt(daily);
+    document.getElementById('s1-ann').textContent=ann>=1000?'$'+Math.round(ann/1000)+'K':fmt(ann);
+  }
+  if(n===2){
+    const {v}=vals(),nd=N[document.getElementById('niche').value];
+    document.getElementById('s2-q').textContent=nd.q;
+    document.getElementById('s2-a1').textContent=nd.a1;
+    document.getElementById('s2-a3').textContent=nd.a3;
+    document.getElementById('s2-won').textContent=fmt(v)+' saved';
+    if(!s2done){s2done=true;runConvo();}
+  }
+  if(n===3){
+    const {c,v,m}=vals();
+    const mo=Math.round(c*m*22),rev=mo*v,net=rev-497;
+    document.getElementById('r-miss').textContent=mo+' calls';
+    document.getElementById('r-rev').textContent=fmt(rev);
+    document.getElementById('r-net').textContent=fmt(Math.max(0,net));
+    document.getElementById('r-ann').textContent=fmt(Math.max(0,net)*12);
+  }
+  if(n===4){
+    const bnames={medspa:'Mira Mesa Med Spa',chiro:'Your Chiro Clinic',dental:'Your Dental Practice',law:'Your Law Firm',hvac:'Your HVAC Company',other:'Your Business'};
+    document.getElementById('rv-biz').textContent=bnames[document.getElementById('niche').value];
+  }
+}
+
+function runConvo(){
+  setTimeout(()=>{document.getElementById('t1').style.display='none';show('a1');},1800);
+  setTimeout(()=>{show('c1');},3200);
+  setTimeout(()=>{show('a2');},4500);
+  setTimeout(()=>{show('c2');},5700);
+  setTimeout(()=>{show('a3');},7000);
+  setTimeout(()=>{show('sys1');},8200);
+  setTimeout(()=>{
+    document.getElementById('s2-pills').style.display='flex';
+    document.getElementById('s2-win').style.display='flex';
+    document.getElementById('s2-next').style.display='block';
+  },9000);
+}
+</script>
+</body>
+</html>

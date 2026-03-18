@@ -9,13 +9,13 @@ const stats = [
 
 const activities = [
   { icon: Phone,         label: 'Call Answered',       color: '#22d3ee', delay: '0s' },
-  { icon: Calendar,      label: 'Appointment Booked',  color: '#c084fc', delay: '1s' },
+  { icon: Calendar,      label: 'Appontment Booked',  color: '#c084fc', delay: '1s' },
   { icon: CheckCircle,   label: 'Lead Captured',       color: '#34d399', delay: '2s' },
   { icon: MessageSquare, label: 'SMS Follow-up Sent',  color: '#f472b6', delay: '3s' },
 ]
 
 // Ring diameters — small enough that corner chips (22px inset) are always clear
-const ringSizes = [110, 175, 240, 305]
+const ringSizes = [110, 175, 240, 30
 
 // Chips in the 4 corners of the 560×520 container (~230px from orb center)
 const cornerPositions = [
