@@ -62,9 +62,7 @@ export default function Footer() {
                   style={{ background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)' }}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M2 17 L18 17" stroke="white" strokeOpacity="0.3" strokeWidth="1" strokeLinecap="round"/>
-                    <path d="M2 14 L5 11 L8 12.5 L11 7.5 L14 9 L18 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M17 7.5 L18 4 L14.5 5.8" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 11 L7 15 L17 4" stroke="white" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
                 <span className="text-lg font-bold text-white leading-none whitespace-nowrap">
