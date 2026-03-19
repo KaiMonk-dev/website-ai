@@ -44,6 +44,8 @@ export default function Process() {
   const iframeRef = useRef(null)
   const [ended, setEnded] = useState(false)
 
+  const playerRef = useRef(null)
+
   useEffect(() => {
     const script = document.createElement('script')
     script.src = 'https://player.vimeo.com/api/player.js'
@@ -52,12 +54,22 @@ export default function Process() {
       if (!iframeRef.current) return
       // eslint-disable-next-line no-undef
       const player = new Vimeo.Player(iframeRef.current)
+      playerRef.current = player
       player.on('ended', () => setEnded(true))
       player.on('play', () => setEnded(false))
     }
     document.body.appendChild(script)
     return () => { document.body.removeChild(script) }
   }, [])
+
+  const handleReplay = () => {
+    if (playerRef.current) {
+      playerRef.current.setCurrentTime(0).then(() => {
+        playerRef.current.play()
+        setEnded(false)
+      })
+    }
+  }
 
   return (
     <section id="how-it-works" className="py-24 relative overflow-hidden">
@@ -122,10 +134,40 @@ export default function Process() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    background: '#050508',
+                    background: 'rgba(5,5,8,0.92)',
                     zIndex: 10,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '16px',
                   }}
-                />
+                >
+                  <button
+                    onClick={handleReplay}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      background: 'linear-gradient(135deg, #7c3aed, #3b82f6)',
+                      color: '#fff',
+                      fontSize: '16px',
+                      fontWeight: '700',
+                      padding: '14px 32px',
+                      borderRadius: '12px',
+                      border: 'none',
+                      cursor: 'pointer',
+                      boxShadow: '0 0 30px rgba(124,58,237,0.5)',
+                    }}
+                    onMouseEnter={e => e.currentTarget.style.opacity = '0.85'}
+                    onMouseLeave={e => e.currentTarget.style.opacity = '1'}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                    </svg>
+                    Watch Again
+                  </button>
+                </div>
               )}
             </div>
           </div>

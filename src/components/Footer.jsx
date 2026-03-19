@@ -106,7 +106,7 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-600 text-sm">
-              © {new Date().getFullYear()} Ascension First AI. All rights reserved.
+              © 2025 Ascension First AI. Est. 2025. All rights reserved.
             </p>
             <p
               className="text-sm font-semibold"

@@ -14,13 +14,30 @@ export default function Contact() {
     name: '', business: '', email: '', phone: '',
     industry: '', volume: '', message: '',
   })
+  const [errors, setErrors] = useState({})
 
-  const set = (k) => (e) => setForm(prev => ({ ...prev, [k]: e.target.value }))
+  const set = (k) => (e) => {
+    setForm(prev => ({ ...prev, [k]: e.target.value }))
+    if (errors[k]) setErrors(prev => ({ ...prev, [k]: false }))
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const newErrors = {}
+    if (!form.industry) newErrors.industry = true
+    if (!form.volume) newErrors.volume = true
+    if (!form.message.trim()) newErrors.message = true
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors)
+      return
+    }
     setSubmitted(true)
   }
+
+  const selectStyle = (hasError) => ({
+    background: 'rgba(255,255,255,0.04)',
+    border: `1px solid ${hasError ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}`,
+  })
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
@@ -67,7 +84,7 @@ export default function Contact() {
               <h3 className="text-white font-semibold mb-2">Contact Us Directly</h3>
               {[
                 { icon: Phone, text: '+1 (619) 333-7864', href: 'tel:+16193337864' },
-                { icon: Mail, text: 'hello@ascensionfirstai.com', href: 'mailto:hello@ascensionfirstai.com' },
+                { icon: Mail, text: 'ascensionfirst.ai@gmail.com', href: 'mailto:ascensionfirst.ai@gmail.com' },
                 { icon: MapPin, text: 'United States', href: '#' },
               ].map(({ icon: Icon, text, href }) => (
                 <a
@@ -141,45 +158,49 @@ export default function Contact() {
 
                   <div className="grid sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-slate-400 text-sm mb-2">Industry</label>
+                      <label className="block text-slate-400 text-sm mb-2">
+                        Industry <span className="text-red-400">*</span>
+                      </label>
                       <select
                         value={form.industry}
                         onChange={set('industry')}
                         className="w-full px-4 py-3 rounded-xl text-sm text-white transition-all duration-200 outline-none"
-                        style={{
-                          background: 'rgba(255,255,255,0.04)',
-                          border: '1px solid rgba(255,255,255,0.08)',
-                        }}
+                        style={selectStyle(errors.industry)}
+                        onFocus={e => e.target.style.borderColor = 'rgba(124,58,237,0.5)'}
+                        onBlur={e => e.target.style.borderColor = errors.industry ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
                       >
                         <option value="" className="bg-[#0f0f1a]">Select industry...</option>
                         {industries.map(i => (
                           <option key={i} value={i} className="bg-[#0f0f1a]">{i}</option>
                         ))}
                       </select>
+                      {errors.industry && <p className="text-red-400 text-xs mt-1">Please select an industry.</p>}
                     </div>
 
                     <div>
-                      <label className="block text-slate-400 text-sm mb-2">Monthly Call Volume</label>
+                      <label className="block text-slate-400 text-sm mb-2">
+                        Monthly Call Volume <span className="text-red-400">*</span>
+                      </label>
                       <select
                         value={form.volume}
                         onChange={set('volume')}
                         className="w-full px-4 py-3 rounded-xl text-sm text-white transition-all duration-200 outline-none"
-                        style={{
-                          background: 'rgba(255,255,255,0.04)',
-                          border: '1px solid rgba(255,255,255,0.08)',
-                        }}
+                        style={selectStyle(errors.volume)}
+                        onFocus={e => e.target.style.borderColor = 'rgba(124,58,237,0.5)'}
+                        onBlur={e => e.target.style.borderColor = errors.volume ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
                       >
                         <option value="" className="bg-[#0f0f1a]">Select volume...</option>
                         {callVolumes.map(v => (
                           <option key={v} value={v} className="bg-[#0f0f1a]">{v}</option>
                         ))}
                       </select>
+                      {errors.volume && <p className="text-red-400 text-xs mt-1">Please select a call volume.</p>}
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-slate-400 text-sm mb-2">
-                      Tell us about your business (optional)
+                      Tell us about your business <span className="text-red-400">*</span>
                     </label>
                     <textarea
                       placeholder="Any specific challenges, goals, or questions you have..."
@@ -189,11 +210,12 @@ export default function Contact() {
                       className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-slate-600 resize-none transition-all duration-200 outline-none"
                       style={{
                         background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)',
+                        border: `1px solid ${errors.message ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}`,
                       }}
                       onFocus={e => e.target.style.borderColor = 'rgba(124,58,237,0.5)'}
-                      onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
+                      onBlur={e => e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
                     />
+                    {errors.message && <p className="text-red-400 text-xs mt-1">Please tell us a bit about your business.</p>}
                   </div>
 
                   <button type="submit" className="neon-btn w-full flex items-center justify-center gap-2 text-base">
