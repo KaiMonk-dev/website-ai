@@ -55,7 +55,10 @@ export default function Process() {
       // eslint-disable-next-line no-undef
       const player = new Vimeo.Player(iframeRef.current)
       playerRef.current = player
-      player.on('ended', () => setEnded(true))
+      // Cover Vimeo's end screen before it renders by triggering ~0.4s early
+      player.on('timeupdate', ({ seconds, duration }) => {
+        if (duration && duration - seconds <= 0.4) setEnded(true)
+      })
       player.on('play', () => setEnded(false))
     }
     document.body.appendChild(script)
@@ -134,7 +137,7 @@ export default function Process() {
                     left: 0,
                     width: '100%',
                     height: '100%',
-                    background: 'rgba(5,5,8,0.92)',
+                    background: '#000',
                     zIndex: 10,
                     display: 'flex',
                     flexDirection: 'column',
