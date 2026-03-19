@@ -61,14 +61,14 @@ export default function Footer() {
                   className="w-9 h-9 rounded-xl flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)' }}
                 >
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M10 16V4" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
-                    <path d="M4.5 9L10 3.5L15.5 9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <circle cx="10" cy="17" r="1.2" fill="white" opacity="0.7"/>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M2 17 L18 17" stroke="white" strokeOpacity="0.3" strokeWidth="1" strokeLinecap="round"/>
+                    <path d="M2 14 L5 11 L8 12.5 L11 7.5 L14 9 L18 4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M17 7.5 L18 4 L14.5 5.8" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-                <span className="text-lg font-bold text-white">
-                  Ascension First <span className="gradient-text">AI</span>
+                <span className="text-lg font-bold text-white leading-none whitespace-nowrap">
+                  Ascension First&nbsp;<span className="gradient-text">AI</span>
                 </span>
               </a>
               <p className="text-slate-500 text-sm leading-relaxed mb-5">
