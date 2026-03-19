@@ -135,7 +135,7 @@ export default function ChatWidget() {
       {/* Panel */}
       {open && (
         <div
-          className="glass-card w-80"
+          className="glass-card w-96"
           style={{
             borderColor: 'rgba(139,92,246,0.45)',
             boxShadow: '0 0 50px rgba(139,92,246,0.25), 0 8px 32px rgba(0,0,0,0.7)',
@@ -320,17 +320,23 @@ export default function ChatWidget() {
 
       {/* Tooltip speech bubble */}
       <div
-        className="absolute bottom-16 right-0 pointer-events-none select-none"
+        className="absolute bottom-[76px] right-0 pointer-events-none select-none"
         style={{ opacity: tooltip && !open ? 1 : 0, transition: 'opacity 0.35s ease' }}
       >
         <div
-          className="glass-card px-3 py-2 text-xs text-white whitespace-nowrap"
-          style={{ borderColor: 'rgba(139,92,246,0.45)', boxShadow: '0 0 20px rgba(139,92,246,0.25)' }}
+          className="glass-card px-4 py-3 text-sm text-white"
+          style={{
+            borderColor: 'rgba(139,92,246,0.55)',
+            boxShadow: '0 0 28px rgba(139,92,246,0.35)',
+            maxWidth: '220px',
+            lineHeight: '1.4',
+          }}
         >
-          Have a question? Ask us! 👋
+          <p className="font-semibold text-white mb-0.5">Have a question? 👋</p>
+          <p className="text-slate-400 text-xs">We answer instantly — try us!</p>
           {/* Triangle pointer */}
           <div
-            className="absolute -bottom-[7px] right-5"
+            className="absolute -bottom-[7px] right-6"
             style={{
               width: 0, height: 0,
               borderLeft: '7px solid transparent',

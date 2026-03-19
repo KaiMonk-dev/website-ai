@@ -174,6 +174,15 @@ export default function Hero() {
               </a>
             </div>
 
+            {/* Trust micro-copy */}
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-1 justify-center lg:justify-start mb-6 text-xs text-slate-500">
+              <span className="flex items-center gap-1"><span className="text-green-400">✓</span> No contracts</span>
+              <span className="w-px h-3 bg-slate-700 hidden sm:block" />
+              <span className="flex items-center gap-1"><span className="text-green-400">✓</span> 30-day money-back guarantee</span>
+              <span className="w-px h-3 bg-slate-700 hidden sm:block" />
+              <span className="flex items-center gap-1"><span className="text-green-400">✓</span> Live in 72 hours</span>
+            </div>
+
             {/* Video teaser link */}
             <div className="flex justify-center lg:justify-start mb-8">
               <a

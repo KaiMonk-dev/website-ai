@@ -1,4 +1,6 @@
-import { Zap, Twitter, Linkedin, Instagram, Facebook } from 'lucide-react'
+import { Twitter, Linkedin, Instagram, Facebook, Phone, Mail, Calendar, Shield } from 'lucide-react'
+
+const CALENDLY = 'https://calendly.com/ascensionfirstai/30min'
 
 const links = {
   Services: [
@@ -59,15 +61,39 @@ export default function Footer() {
                   className="w-9 h-9 rounded-xl flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)' }}
                 >
-                  <Zap className="w-5 h-5 text-white" />
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M10 16V4" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+                    <path d="M4.5 9L10 3.5L15.5 9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <circle cx="10" cy="17" r="1.2" fill="white" opacity="0.7"/>
+                  </svg>
                 </div>
                 <span className="text-lg font-bold text-white">
                   Ascension First <span className="gradient-text">AI</span>
                 </span>
               </a>
-              <p className="text-slate-500 text-sm leading-relaxed mb-6">
+              <p className="text-slate-500 text-sm leading-relaxed mb-5">
                 The AI receptionist platform built for businesses that refuse to miss a single opportunity.
               </p>
+              {/* Contact details */}
+              <div className="space-y-2 mb-5">
+                <a href="tel:+16193337864" className="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-300 transition-colors">
+                  <Phone className="w-3.5 h-3.5 text-cyan-500" />+1 (619) 333-7864
+                </a>
+                <a href="mailto:hello@ascensionfirstai.com" className="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-300 transition-colors">
+                  <Mail className="w-3.5 h-3.5 text-purple-400" />hello@ascensionfirstai.com
+                </a>
+                <a href={CALENDLY} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-300 transition-colors">
+                  <Calendar className="w-3.5 h-3.5 text-emerald-400" />Book a free 30-min call
+                </a>
+              </div>
+              {/* Trust badges */}
+              <div className="flex flex-wrap gap-2 mb-5">
+                {['HIPAA Compliant', 'SOC2 Certified', 'SSL Secured'].map(b => (
+                  <span key={b} className="flex items-center gap-1 px-2 py-1 rounded-full text-[10px] text-slate-500" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                    <Shield className="w-2.5 h-2.5 text-emerald-500" />{b}
+                  </span>
+                ))}
+              </div>
               {/* Social icons */}
               <div className="flex gap-3">
                 {socials.map(({ icon: Icon, href, label }) => (
@@ -106,8 +132,12 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-slate-600 text-sm">
-              © 2025 Ascension First AI. Est. 2025. All rights reserved.
+              © {new Date().getFullYear()} Ascension First AI. All rights reserved.
             </p>
+            <div className="flex items-center gap-1.5 text-xs text-slate-600">
+              <span className="text-yellow-500">★★★★★</span>
+              <span>4.9/5 · 500+ businesses · No contracts · 30-day guarantee</span>
+            </div>
             <p
               className="text-sm font-semibold"
               style={{ background: 'linear-gradient(135deg, #c084fc, #6366f1, #22d3ee)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}

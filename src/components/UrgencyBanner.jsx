@@ -9,8 +9,8 @@ export default function UrgencyBanner() {
 
   useEffect(() => {
     if (dismissed) return
-    // Fire at 25s — well after the chat widget (5s) has had its moment
-    const t = setTimeout(() => setVisible(true), 25000)
+    // Fire at 12s — chat widget wiggle is at 5s, enough separation
+    const t = setTimeout(() => setVisible(true), 12000)
     return () => clearTimeout(t)
   }, [dismissed])
 

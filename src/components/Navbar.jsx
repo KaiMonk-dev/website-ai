@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Zap } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 
 const navLinks = [
   { label: 'Features', href: '#features' },
@@ -33,7 +33,12 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center" style={{background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)'}}>
-              <Zap className="w-5 h-5 text-white" />
+              {/* Ascending arrow — upward momentum mark */}
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M10 16V4" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+                <path d="M4.5 9L10 3.5L15.5 9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                <circle cx="10" cy="17" r="1.2" fill="white" opacity="0.7"/>
+              </svg>
             </div>
             <span className="text-lg font-bold text-white">
               Ascension First <span className="gradient-text">AI</span>
