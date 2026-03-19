@@ -55,8 +55,13 @@ export default function Navbar() {
 
           {/* CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <a href="#contact" className="neon-btn text-sm px-6 py-2.5">
-              Get Started
+            <a
+              href="https://calendly.com/ascensionfirstai/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="neon-btn text-sm px-6 py-2.5"
+            >
+              Book a Free Call
             </a>
           </div>
 
@@ -85,8 +90,13 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
-            <a href="#contact" className="neon-btn text-center text-sm">
-              Get Started
+            <a
+              href="https://calendly.com/ascensionfirstai/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="neon-btn text-center text-sm"
+            >
+              Book a Free Call
             </a>
           </div>
         </div>

@@ -95,6 +95,24 @@
   }
 }
 
+/* Scroll-reveal animations */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.scroll-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide-up for modals / chat panel */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

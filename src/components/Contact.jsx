@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Send, Phone, Mail, MapPin, CheckCircle } from 'lucide-react'
+import { Send, Phone, Mail, MapPin, CheckCircle, ArrowRight, ArrowLeft, Calendar } from 'lucide-react'
 
 const industries = [
   'Medical & Dental', 'Law Firm', 'Real Estate', 'Auto Dealership',
@@ -9,7 +9,8 @@ const industries = [
 const callVolumes = ['< 50 calls/mo', '50–200 calls/mo', '200–500 calls/mo', '500+ calls/mo']
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false)
+  const [step, setStep] = useState(1)
+  const [booked, setBooked] = useState(false)
   const [form, setForm] = useState({
     name: '', business: '', email: '', phone: '',
     industry: '', volume: '', message: '',
@@ -21,23 +22,41 @@ export default function Contact() {
     if (errors[k]) setErrors(prev => ({ ...prev, [k]: false }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const newErrors = {}
-    if (!form.industry) newErrors.industry = true
-    if (!form.volume) newErrors.volume = true
-    if (!form.message.trim()) newErrors.message = true
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors)
-      return
-    }
-    setSubmitted(true)
+  const validateStep1 = () => {
+    const e = {}
+    if (!form.name.trim()) e.name = true
+    if (!form.business.trim()) e.business = true
+    if (!form.email.trim()) e.email = true
+    if (!form.phone.trim()) e.phone = true
+    setErrors(e)
+    return Object.keys(e).length === 0
   }
 
-  const selectStyle = (hasError) => ({
+  const validateStep2 = () => {
+    const e = {}
+    if (!form.industry) e.industry = true
+    if (!form.volume) e.volume = true
+    if (!form.message.trim()) e.message = true
+    setErrors(e)
+    return Object.keys(e).length === 0
+  }
+
+  const handleNext = (e) => {
+    e.preventDefault()
+    if (validateStep1()) setStep(2)
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (validateStep2()) setStep(3)
+  }
+
+  const inputStyle = (hasError) => ({
     background: 'rgba(255,255,255,0.04)',
     border: `1px solid ${hasError ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}`,
   })
+
+  const focusStyle = 'rgba(124,58,237,0.5)'
 
   return (
     <section id="contact" className="py-24 relative overflow-hidden">
@@ -51,11 +70,11 @@ export default function Contact() {
             Get Started
           </div>
           <h2 className="section-title mb-4">
-            Let's Build Your{' '}
-            <span className="gradient-text">AI Receptionist</span>
+            Book Your Free{' '}
+            <span className="gradient-text">Strategy Call</span>
           </h2>
           <p className="section-subtitle">
-            Book a free 30-minute strategy call. We'll map out your custom AI solution with no pressure.
+            Takes 2 minutes. We'll map out your custom AI solution with zero pressure.
           </p>
         </div>
 
@@ -84,7 +103,7 @@ export default function Contact() {
               <h3 className="text-white font-semibold mb-2">Contact Us Directly</h3>
               {[
                 { icon: Phone, text: '+1 (619) 333-7864', href: 'tel:+16193337864' },
-                { icon: Mail, text: 'ascensionfirst.ai@gmail.com', href: 'mailto:ascensionfirst.ai@gmail.com' },
+                { icon: Mail,  text: 'ascensionfirst.ai@gmail.com', href: 'mailto:ascensionfirst.ai@gmail.com' },
                 { icon: MapPin, text: 'United States', href: '#' },
               ].map(({ icon: Icon, text, href }) => (
                 <a
@@ -112,121 +131,230 @@ export default function Contact() {
           {/* Form */}
           <div className="lg:col-span-3">
             <div className="glass-card p-8">
-              {submitted ? (
-                <div className="text-center py-12">
+
+              {/* Step 3 — Book your call */}
+              {step === 3 ? (
+                <div className="text-center py-4">
                   <div
                     className="w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6"
                     style={{ background: 'rgba(124,58,237,0.2)', border: '1px solid rgba(124,58,237,0.4)' }}
                   >
                     <CheckCircle className="w-10 h-10 text-purple-400" />
                   </div>
-                  <h3 className="text-white text-2xl font-bold mb-3">
-                    We'll be in touch within 24 hours!
-                  </h3>
-                  <p className="text-slate-400 text-sm">
-                    Thank you for reaching out. Our team will review your submission and schedule your free strategy call.
+                  <h3 className="text-white text-2xl font-bold mb-2">Your info is saved!</h3>
+                  <p className="text-slate-400 text-sm mb-8 leading-relaxed">
+                    One last step — pick a time that works for you and lock in your free 30-minute strategy call.
                   </p>
+
+                  {booked ? (
+                    <div className="space-y-4">
+                      <div className="text-green-400 font-semibold text-lg">🎉 You're booked!</div>
+                      <p className="text-slate-400 text-sm">Check your email for the confirmation. We'll see you on the call!</p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4">
+                      <a
+                        href="https://calendly.com/ascensionfirstai/30min"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setBooked(true)}
+                        className="neon-btn w-full flex items-center justify-center gap-2 text-base"
+                      >
+                        <Calendar className="w-5 h-5" />
+                        Book My Free Strategy Call
+                      </a>
+                      <a
+                        href="https://calendar.app.google/QCrjgfWodrJuUMHq7"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setBooked(true)}
+                        className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-300 hover:scale-[1.01]"
+                        style={{
+                          background: 'rgba(255,255,255,0.05)',
+                          border: '1px solid rgba(255,255,255,0.12)',
+                        }}
+                      >
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                          <rect x="3" y="4" width="18" height="17" rx="2" stroke="#4ade80" strokeWidth="1.5"/>
+                          <path d="M3 9h18" stroke="#4ade80" strokeWidth="1.5"/>
+                          <path d="M8 2v3M16 2v3" stroke="#4ade80" strokeWidth="1.5" strokeLinecap="round"/>
+                        </svg>
+                        Open Google Calendar instead
+                      </a>
+                      <button
+                        onClick={() => setStep(2)}
+                        className="text-slate-500 text-xs hover:text-slate-400 transition-colors w-full mt-2"
+                      >
+                        ← Go back and edit my answers
+                      </button>
+                    </div>
+                  )}
                 </div>
+
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    {[
-                      { label: 'Your Name', key: 'name', placeholder: 'John Smith', type: 'text', required: true },
-                      { label: 'Business Name', key: 'business', placeholder: 'Acme Corp', type: 'text', required: true },
-                      { label: 'Email Address', key: 'email', placeholder: 'john@acme.com', type: 'email', required: true },
-                      { label: 'Phone Number', key: 'phone', placeholder: '+1 (555) 000-0000', type: 'tel', required: true },
-                    ].map(({ label, key, placeholder, type, required }) => (
-                      <div key={key}>
-                        <label className="block text-slate-400 text-sm mb-2">{label}</label>
-                        <input
-                          type={type}
-                          placeholder={placeholder}
-                          value={form[key]}
-                          onChange={set(key)}
-                          required={required}
-                          className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-slate-600 transition-all duration-200 outline-none focus:border-purple-500/50"
-                          style={{
-                            background: 'rgba(255,255,255,0.04)',
-                            border: '1px solid rgba(255,255,255,0.08)',
-                          }}
-                          onFocus={e => e.target.style.borderColor = 'rgba(124,58,237,0.5)'}
-                          onBlur={e => e.target.style.borderColor = 'rgba(255,255,255,0.08)'}
-                        />
+                <>
+                  {/* Progress bar */}
+                  <div className="mb-8">
+                    <div className="flex items-center justify-between mb-3">
+                      {['Your Info', 'Your Business', 'Book Call'].map((label, i) => {
+                        const stepNum = i + 1
+                        const isActive = step === stepNum
+                        const isDone = step > stepNum
+                        return (
+                          <div key={label} className="flex items-center gap-2 flex-1">
+                            <div className="flex flex-col items-center gap-1">
+                              <div
+                                className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all duration-300"
+                                style={{
+                                  background: isDone
+                                    ? 'rgba(52,211,153,0.2)'
+                                    : isActive
+                                    ? 'linear-gradient(135deg, #7c3aed, #3b82f6)'
+                                    : 'rgba(255,255,255,0.06)',
+                                  border: isDone
+                                    ? '1px solid rgba(52,211,153,0.5)'
+                                    : isActive
+                                    ? '1px solid rgba(139,92,246,0.6)'
+                                    : '1px solid rgba(255,255,255,0.1)',
+                                  color: isDone ? '#34d399' : isActive ? '#fff' : '#4b5563',
+                                }}
+                              >
+                                {isDone ? '✓' : stepNum}
+                              </div>
+                              <span
+                                className="text-xs whitespace-nowrap hidden sm:block"
+                                style={{ color: isActive ? '#c084fc' : isDone ? '#34d399' : '#4b5563' }}
+                              >
+                                {label}
+                              </span>
+                            </div>
+                            {i < 2 && (
+                              <div
+                                className="flex-1 h-px mx-2 mb-4 sm:mb-0 transition-all duration-500"
+                                style={{ background: step > stepNum ? 'rgba(52,211,153,0.4)' : 'rgba(255,255,255,0.08)' }}
+                              />
+                            )}
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </div>
+
+                  {/* Step 1 — Your Info */}
+                  {step === 1 && (
+                    <form onSubmit={handleNext} className="space-y-5">
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        {[
+                          { label: 'Your Name',      key: 'name',     placeholder: 'John Smith',          type: 'text'  },
+                          { label: 'Business Name',  key: 'business', placeholder: 'Acme Corp',           type: 'text'  },
+                          { label: 'Email Address',  key: 'email',    placeholder: 'john@acme.com',       type: 'email' },
+                          { label: 'Phone Number',   key: 'phone',    placeholder: '+1 (555) 000-0000',   type: 'tel'   },
+                        ].map(({ label, key, placeholder, type }) => (
+                          <div key={key}>
+                            <label className="block text-slate-400 text-sm mb-2">
+                              {label} <span className="text-red-400">*</span>
+                            </label>
+                            <input
+                              type={type}
+                              placeholder={placeholder}
+                              value={form[key]}
+                              onChange={set(key)}
+                              className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-slate-600 transition-all duration-200 outline-none"
+                              style={inputStyle(errors[key])}
+                              onFocus={e => e.target.style.borderColor = focusStyle}
+                              onBlur={e => e.target.style.borderColor = errors[key] ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
+                            />
+                            {errors[key] && <p className="text-red-400 text-xs mt-1">This field is required.</p>}
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
 
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-slate-400 text-sm mb-2">
-                        Industry <span className="text-red-400">*</span>
-                      </label>
-                      <select
-                        value={form.industry}
-                        onChange={set('industry')}
-                        className="w-full px-4 py-3 rounded-xl text-sm text-white transition-all duration-200 outline-none"
-                        style={selectStyle(errors.industry)}
-                        onFocus={e => e.target.style.borderColor = 'rgba(124,58,237,0.5)'}
-                        onBlur={e => e.target.style.borderColor = errors.industry ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
-                      >
-                        <option value="" className="bg-[#0f0f1a]">Select industry...</option>
-                        {industries.map(i => (
-                          <option key={i} value={i} className="bg-[#0f0f1a]">{i}</option>
-                        ))}
-                      </select>
-                      {errors.industry && <p className="text-red-400 text-xs mt-1">Please select an industry.</p>}
-                    </div>
+                      <button type="submit" className="neon-btn w-full flex items-center justify-center gap-2 text-base">
+                        Next — Tell Us About Your Business
+                        <ArrowRight className="w-5 h-5" />
+                      </button>
+                    </form>
+                  )}
 
-                    <div>
-                      <label className="block text-slate-400 text-sm mb-2">
-                        Monthly Call Volume <span className="text-red-400">*</span>
-                      </label>
-                      <select
-                        value={form.volume}
-                        onChange={set('volume')}
-                        className="w-full px-4 py-3 rounded-xl text-sm text-white transition-all duration-200 outline-none"
-                        style={selectStyle(errors.volume)}
-                        onFocus={e => e.target.style.borderColor = 'rgba(124,58,237,0.5)'}
-                        onBlur={e => e.target.style.borderColor = errors.volume ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
-                      >
-                        <option value="" className="bg-[#0f0f1a]">Select volume...</option>
-                        {callVolumes.map(v => (
-                          <option key={v} value={v} className="bg-[#0f0f1a]">{v}</option>
-                        ))}
-                      </select>
-                      {errors.volume && <p className="text-red-400 text-xs mt-1">Please select a call volume.</p>}
-                    </div>
-                  </div>
+                  {/* Step 2 — Your Business */}
+                  {step === 2 && (
+                    <form onSubmit={handleSubmit} className="space-y-5">
+                      <div className="grid sm:grid-cols-2 gap-5">
+                        <div>
+                          <label className="block text-slate-400 text-sm mb-2">
+                            Industry <span className="text-red-400">*</span>
+                          </label>
+                          <select
+                            value={form.industry}
+                            onChange={set('industry')}
+                            className="w-full px-4 py-3 rounded-xl text-sm text-white transition-all duration-200 outline-none"
+                            style={inputStyle(errors.industry)}
+                            onFocus={e => e.target.style.borderColor = focusStyle}
+                            onBlur={e => e.target.style.borderColor = errors.industry ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
+                          >
+                            <option value="" className="bg-[#0f0f1a]">Select industry...</option>
+                            {industries.map(i => <option key={i} value={i} className="bg-[#0f0f1a]">{i}</option>)}
+                          </select>
+                          {errors.industry && <p className="text-red-400 text-xs mt-1">Please select an industry.</p>}
+                        </div>
 
-                  <div>
-                    <label className="block text-slate-400 text-sm mb-2">
-                      Tell us about your business <span className="text-red-400">*</span>
-                    </label>
-                    <textarea
-                      placeholder="Any specific challenges, goals, or questions you have..."
-                      value={form.message}
-                      onChange={set('message')}
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-slate-600 resize-none transition-all duration-200 outline-none"
-                      style={{
-                        background: 'rgba(255,255,255,0.04)',
-                        border: `1px solid ${errors.message ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}`,
-                      }}
-                      onFocus={e => e.target.style.borderColor = 'rgba(124,58,237,0.5)'}
-                      onBlur={e => e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
-                    />
-                    {errors.message && <p className="text-red-400 text-xs mt-1">Please tell us a bit about your business.</p>}
-                  </div>
+                        <div>
+                          <label className="block text-slate-400 text-sm mb-2">
+                            Monthly Call Volume <span className="text-red-400">*</span>
+                          </label>
+                          <select
+                            value={form.volume}
+                            onChange={set('volume')}
+                            className="w-full px-4 py-3 rounded-xl text-sm text-white transition-all duration-200 outline-none"
+                            style={inputStyle(errors.volume)}
+                            onFocus={e => e.target.style.borderColor = focusStyle}
+                            onBlur={e => e.target.style.borderColor = errors.volume ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
+                          >
+                            <option value="" className="bg-[#0f0f1a]">Select volume...</option>
+                            {callVolumes.map(v => <option key={v} value={v} className="bg-[#0f0f1a]">{v}</option>)}
+                          </select>
+                          {errors.volume && <p className="text-red-400 text-xs mt-1">Please select a call volume.</p>}
+                        </div>
+                      </div>
 
-                  <button type="submit" className="neon-btn w-full flex items-center justify-center gap-2 text-base">
-                    <Send className="w-5 h-5" />
-                    Book My Free Strategy Call
-                  </button>
+                      <div>
+                        <label className="block text-slate-400 text-sm mb-2">
+                          Tell us about your business <span className="text-red-400">*</span>
+                        </label>
+                        <textarea
+                          placeholder="Any specific challenges, goals, or questions you have..."
+                          value={form.message}
+                          onChange={set('message')}
+                          rows={4}
+                          className="w-full px-4 py-3 rounded-xl text-sm text-white placeholder-slate-600 resize-none transition-all duration-200 outline-none"
+                          style={inputStyle(errors.message)}
+                          onFocus={e => e.target.style.borderColor = focusStyle}
+                          onBlur={e => e.target.style.borderColor = errors.message ? 'rgba(239,68,68,0.6)' : 'rgba(255,255,255,0.08)'}
+                        />
+                        {errors.message && <p className="text-red-400 text-xs mt-1">Please tell us a bit about your business.</p>}
+                      </div>
 
-                  <p className="text-slate-600 text-xs text-center">
-                    By submitting, you agree to our Privacy Policy. No spam, ever.
-                  </p>
-                </form>
+                      <div className="flex gap-3">
+                        <button
+                          type="button"
+                          onClick={() => setStep(1)}
+                          className="outline-btn flex items-center gap-2 text-sm px-5"
+                        >
+                          <ArrowLeft className="w-4 h-4" />
+                          Back
+                        </button>
+                        <button type="submit" className="neon-btn flex-1 flex items-center justify-center gap-2 text-base">
+                          <Send className="w-5 h-5" />
+                          Submit &amp; Book My Call
+                        </button>
+                      </div>
+
+                      <p className="text-slate-600 text-xs text-center">
+                        By submitting, you agree to our Privacy Policy. No spam, ever.
+                      </p>
+                    </form>
+                  )}
+                </>
               )}
             </div>
           </div>

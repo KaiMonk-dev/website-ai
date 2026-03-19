@@ -1,5 +1,7 @@
 import { Check, Zap, Star, Building } from 'lucide-react'
 
+const CALENDLY = 'https://calendly.com/ascensionfirstai/30min'
+
 const plans = [
   {
     name: 'Starter',
@@ -18,6 +20,8 @@ const plans = [
       '72-hour setup',
     ],
     cta: 'Get Started',
+    href: CALENDLY,
+    external: true,
     popular: false,
   },
   {
@@ -38,6 +42,8 @@ const plans = [
       'Priority support',
     ],
     cta: 'Start Free Trial',
+    href: CALENDLY,
+    external: true,
     popular: true,
     badge: 'Most Popular',
   },
@@ -59,6 +65,8 @@ const plans = [
       'Custom integrations',
     ],
     cta: 'Contact Sales',
+    href: '#contact',
+    external: false,
     popular: false,
   },
 ]
@@ -86,7 +94,7 @@ export default function Pricing() {
 
         {/* Pricing cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-          {plans.map(({ name, price, period, desc, icon: Icon, color, features, cta, popular, badge }) => (
+          {plans.map(({ name, price, period, desc, icon: Icon, color, features, cta, href, external, popular, badge }) => (
             <div
               key={name}
               className={`glass-card p-8 relative transition-all duration-300 ${
@@ -159,7 +167,9 @@ export default function Pricing() {
 
               {/* CTA */}
               <a
-                href="#contact"
+                href={href}
+                target={external ? '_blank' : undefined}
+                rel={external ? 'noopener noreferrer' : undefined}
                 className={`block text-center py-3.5 rounded-xl font-semibold transition-all duration-300 ${
                   popular
                     ? 'neon-btn'
