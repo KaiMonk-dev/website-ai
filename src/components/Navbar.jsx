@@ -33,9 +33,9 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)'}}>
-              {/* Bold ascending tick */}
+              {/* Stock ticker / lightning bolt going up */}
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 11 L7 15 L17 4" stroke="white" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M3 16 L10 7 L7 7 L15 3" stroke="white" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
             <span className="text-lg font-bold text-white leading-none whitespace-nowrap">
