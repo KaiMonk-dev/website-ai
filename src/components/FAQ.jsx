@@ -95,7 +95,7 @@ export default function FAQ() {
         <div className="text-center mt-10">
           <p className="text-slate-500 text-sm">
             Still have questions?{' '}
-            <a href="#contact" className="text-purple-400 hover:text-purple-300 underline">
+            <a href="https://calendly.com/ascensionfirstai/30min" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:text-purple-300 underline">
               Talk to our team →
             </a>
           </p>

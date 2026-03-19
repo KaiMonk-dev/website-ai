@@ -40,13 +40,35 @@ const steps = [
   },
 ]
 
+const VIMEO_SRC = 'https://player.vimeo.com/video/1156355064?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&share=0&end_screen=0'
+
 export default function Process() {
   const iframeRef = useRef(null)
+  const videoContainerRef = useRef(null)
   const [ended, setEnded] = useState(false)
+  const [videoReady, setVideoReady] = useState(false)
 
   const playerRef = useRef(null)
 
+  // Lazy-load: only inject iframe src when the video section scrolls into view
   useEffect(() => {
+    const container = videoContainerRef.current
+    if (!container) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVideoReady(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: '200px' }
+    )
+    observer.observe(container)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!videoReady) return
     const script = document.createElement('script')
     script.src = 'https://player.vimeo.com/api/player.js'
     script.async = true
@@ -63,7 +85,7 @@ export default function Process() {
     }
     document.body.appendChild(script)
     return () => { document.body.removeChild(script) }
-  }, [])
+  }, [videoReady])
 
   const handleReplay = () => {
     if (playerRef.current) {
@@ -95,7 +117,7 @@ export default function Process() {
         </div>
 
         {/* Vimeo video embed */}
-        <div className="max-w-4xl mx-auto mb-20">
+        <div ref={videoContainerRef} className="max-w-4xl mx-auto mb-20">
           <div
             className="glass-card overflow-hidden p-1.5 relative"
             style={{
@@ -116,7 +138,7 @@ export default function Process() {
             >
               <iframe
                 ref={iframeRef}
-                src="https://player.vimeo.com/video/1156355064?badge=0&autopause=0&player_id=0&app_id=58479&title=0&byline=0&portrait=0&share=0&end_screen=0"
+                src={videoReady ? VIMEO_SRC : undefined}
                 frameBorder="0"
                 allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media"
                 allowFullScreen
@@ -220,7 +242,7 @@ export default function Process() {
 
         {/* CTA below process */}
         <div className="text-center mt-16">
-          <a href="#contact" className="neon-btn inline-flex items-center gap-2 text-base">
+          <a href="https://calendly.com/ascensionfirstai/30min" target="_blank" rel="noopener noreferrer" className="neon-btn inline-flex items-center gap-2 text-base">
             <Rocket className="w-5 h-5" />
             Start Your Setup Today
           </a>

@@ -145,7 +145,7 @@ export default function ROICalculator() {
                 </div>
               ))}
 
-              <a href="#contact" className="neon-btn text-center mt-2 flex items-center justify-center gap-2">
+              <a href="https://calendly.com/ascensionfirstai/30min" target="_blank" rel="noopener noreferrer" className="neon-btn text-center mt-2 flex items-center justify-center gap-2">
                 <TrendingUp className="w-5 h-5" />
                 Recover This Revenue
               </a>

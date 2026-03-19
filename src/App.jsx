@@ -13,6 +13,8 @@ import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import LogoBar from './components/LogoBar'
+import CtaBridge from './components/CtaBridge'
+import ComparisonTable from './components/ComparisonTable'
 import UrgencyBanner from './components/UrgencyBanner'
 import ChatWidget from './components/ChatWidget'
 import ExitIntentPopup from './components/ExitIntentPopup'
@@ -58,9 +60,11 @@ export default function App() {
           <Hero />
           <LogoBar />
           <Problem />
+          <CtaBridge />
           <Process />
           <Demo />
           <Features />
+          <ComparisonTable />
           <ROICalculator />
           <Pricing />
           <Testimonials />
