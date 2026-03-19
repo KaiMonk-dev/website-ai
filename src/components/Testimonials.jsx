@@ -1,4 +1,5 @@
-import { Star, Quote } from 'lucide-react'
+import { useState } from 'react'
+import { Star, Quote, ChevronDown, ChevronUp } from 'lucide-react'
 
 const testimonials = [
   {
@@ -80,6 +81,9 @@ function Stars() {
 }
 
 export default function Testimonials() {
+  const [showAll, setShowAll] = useState(false)
+  const visible = showAll ? testimonials : testimonials.slice(0, 3)
+
   return (
     <section id="testimonials" className="py-24 relative overflow-hidden">
       <div className="glow-orb w-[600px] h-[400px] bg-blue-600/8 top-0 right-0" />
@@ -103,7 +107,7 @@ export default function Testimonials() {
 
         {/* Testimonial grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {testimonials.map(({ quote, name, title, result, resultLabel, color, bg, border }) => (
+          {visible.map(({ quote, name, title, result, resultLabel, color, bg, border }) => (
             <div key={name} className="glass-card-hover p-6 flex flex-col">
               {/* Quote icon */}
               <div className="mb-4">
@@ -135,6 +139,31 @@ export default function Testimonials() {
             </div>
           ))}
         </div>
+
+        {/* Expand toggle */}
+        {!showAll && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => setShowAll(true)}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-slate-400 hover:text-white transition-all duration-200 hover:scale-[1.02]"
+              style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)' }}
+            >
+              <ChevronDown className="w-4 h-4" />
+              Show 3 more results
+            </button>
+          </div>
+        )}
+        {showAll && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => setShowAll(false)}
+              className="inline-flex items-center gap-2 text-sm text-slate-600 hover:text-slate-400 transition-colors"
+            >
+              <ChevronUp className="w-4 h-4" />
+              Show less
+            </button>
+          </div>
+        )}
 
         {/* Overall rating */}
         <div className="text-center mt-12 flex flex-col items-center gap-3">

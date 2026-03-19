@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Problem from './components/Problem'
-import BeforeAfter from './components/BeforeAfter'
+// BeforeAfter removed — content redundant with Problem stats + ROICalculator
 import Demo from './components/Demo'
 import Features from './components/Features'
 import Process from './components/Process'
@@ -58,7 +58,6 @@ export default function App() {
           <Hero />
           <LogoBar />
           <Problem />
-          <BeforeAfter />
           <Process />
           <Demo />
           <Features />
