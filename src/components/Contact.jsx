@@ -8,9 +8,12 @@ const industries = [
 
 const callVolumes = ['< 50 calls/mo', '50–200 calls/mo', '200–500 calls/mo', '500+ calls/mo']
 
+const FORMSPREE_ENDPOINT = 'https://formspree.io/ascensionfirstai@gmail.com'
+
 export default function Contact() {
   const [step, setStep] = useState(1)
   const [booked, setBooked] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
   const [form, setForm] = useState({
     name: '', business: '', email: '', phone: '',
     industry: '', volume: '', message: '',
@@ -46,9 +49,25 @@ export default function Contact() {
     if (validateStep1()) setStep(2)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    if (validateStep2()) setStep(3)
+    if (!validateStep2()) return
+    setSubmitting(true)
+    try {
+      await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          ...form,
+          _subject: `New lead: ${form.name} — ${form.business}`,
+        }),
+      })
+    } catch {
+      // Silent fail — still advance so user can book their call
+    } finally {
+      setSubmitting(false)
+      setStep(3)
+    }
   }
 
   const inputStyle = (hasError) => ({
@@ -343,9 +362,9 @@ export default function Contact() {
                           <ArrowLeft className="w-4 h-4" />
                           Back
                         </button>
-                        <button type="submit" className="neon-btn flex-1 flex items-center justify-center gap-2 text-base">
+                        <button type="submit" disabled={submitting} className="neon-btn flex-1 flex items-center justify-center gap-2 text-base disabled:opacity-60 disabled:cursor-not-allowed">
                           <Send className="w-5 h-5" />
-                          Submit &amp; Book My Call
+                          {submitting ? 'Sending…' : 'Submit & Book My Call'}
                         </button>
                       </div>
 
