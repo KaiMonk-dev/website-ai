@@ -12,6 +12,7 @@ import Testimonials from './components/Testimonials'
 import FAQ from './components/FAQ'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import LogoBar from './components/LogoBar'
 import UrgencyBanner from './components/UrgencyBanner'
 import ChatWidget from './components/ChatWidget'
 import ExitIntentPopup from './components/ExitIntentPopup'
@@ -55,11 +56,12 @@ export default function App() {
         <Navbar />
         <main>
           <Hero />
+          <LogoBar />
           <Problem />
           <BeforeAfter />
+          <Process />
           <Demo />
           <Features />
-          <Process />
           <ROICalculator />
           <Pricing />
           <Testimonials />

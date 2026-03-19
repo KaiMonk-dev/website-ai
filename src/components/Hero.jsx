@@ -155,7 +155,7 @@ export default function Hero() {
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-10">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
               <a
                 href="https://calendly.com/ascensionfirstai/30min"
                 target="_blank"
@@ -171,6 +171,24 @@ export default function Hero() {
                 style={{ background: 'linear-gradient(135deg,#06d6a0,#059669)', borderColor: '#06d6a0' }}
               >
                 See Your Free Demo
+              </a>
+            </div>
+
+            {/* Video teaser link */}
+            <div className="flex justify-center lg:justify-start mb-8">
+              <a
+                href="#how-it-works"
+                className="flex items-center gap-2 text-slate-500 hover:text-slate-300 text-sm transition-colors group"
+              >
+                <div
+                  className="w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-200 group-hover:scale-110"
+                  style={{ background: 'rgba(255,255,255,0.08)', border: '1px solid rgba(255,255,255,0.15)' }}
+                >
+                  <svg className="w-3 h-3 text-white" style={{ marginLeft: '2px' }} fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                Watch the 2-min overview
               </a>
             </div>
 
@@ -241,7 +259,7 @@ export default function Hero() {
                           ? 'linear-gradient(to top, #8b5cf6, #c084fc)'
                           : 'linear-gradient(to top, #6366f1, #22d3ee)',
                         transformOrigin: 'center bottom',
-                        animation: `orbWave ${hovered ? '0.9s' : '1.6s'} ease-in-out infinite`,
+                        animation: 'orbWave 2.8s cubic-bezier(0.37, 0, 0.63, 1) infinite',
                         animationDelay: `${delay}s`,
                       }}
                     />

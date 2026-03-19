@@ -226,10 +226,25 @@ body::before {
 .wave-bar:nth-child(7) { animation-delay: 0.2s; }
 .wave-bar:nth-child(8) { animation-delay: 0.1s; }
 
-/* Orb hero voice wave — ocean-wave scaleY motion */
+/* Orb hero voice wave — true ocean-wave sine motion, slow and smooth */
 @keyframes orbWave {
-  0%, 100% { transform: scaleY(0.25); opacity: 0.55; }
-  50%       { transform: scaleY(1);    opacity: 1; }
+  0%   { transform: scaleY(0.12); opacity: 0.22; }
+  25%  { transform: scaleY(0.55); opacity: 0.62; }
+  50%  { transform: scaleY(1);    opacity: 1;    }
+  75%  { transform: scaleY(0.55); opacity: 0.62; }
+  100% { transform: scaleY(0.12); opacity: 0.22; }
+}
+
+/* Marquee scroll for logo/industry bar */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Urgent pulse-glow for banner */
+@keyframes urgentPulse {
+  0%, 100% { box-shadow: 0 0 18px rgba(239,68,68,0.35), 0 8px 32px rgba(0,0,0,0.55); }
+  50%       { box-shadow: 0 0 38px rgba(239,68,68,0.7),  0 8px 32px rgba(0,0,0,0.55); }
 }
 
 /* AI Orb pulse rings */

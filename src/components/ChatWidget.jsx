@@ -345,35 +345,38 @@ export default function ChatWidget() {
       <button
         onClick={toggleOpen}
         aria-label={open ? 'Close chat' : 'Get help'}
-        className="w-14 h-14 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 relative"
+        className="w-16 h-16 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110 relative"
         style={{
-          background: 'linear-gradient(135deg, #7c3aed, #3b82f6)',
+          background: 'linear-gradient(135deg, #6d28d9, #7c3aed, #3b82f6)',
           boxShadow: open
-            ? '0 0 30px rgba(124,58,237,0.7), 0 4px 20px rgba(0,0,0,0.4)'
-            : '0 0 28px rgba(124,58,237,0.65), 0 0 55px rgba(124,58,237,0.2), 0 4px 20px rgba(0,0,0,0.4)',
+            ? '0 0 35px rgba(124,58,237,0.75), 0 4px 24px rgba(0,0,0,0.45)'
+            : '0 0 35px rgba(124,58,237,0.75), 0 0 70px rgba(124,58,237,0.25), 0 4px 24px rgba(0,0,0,0.45)',
           animation: wiggle && !open ? 'wiggle 0.5s ease' : undefined,
         }}
       >
-        {/* Outer pulse ring — only when closed */}
+        {/* Outer pulse rings — layered for depth */}
         {!open && (
-          <div
-            className="absolute inset-0 rounded-full pointer-events-none"
-            style={{
-              border: '2px solid rgba(139,92,246,0.55)',
-              animation: 'pulseRing 2.5s ease-out infinite',
-            }}
-          />
+          <>
+            <div
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{ border: '2px solid rgba(139,92,246,0.6)', animation: 'pulseRing 2.2s ease-out infinite' }}
+            />
+            <div
+              className="absolute inset-0 rounded-full pointer-events-none"
+              style={{ border: '2px solid rgba(99,102,241,0.35)', animation: 'pulseRing 2.2s ease-out infinite 0.7s' }}
+            />
+          </>
         )}
 
         {/* Notification badge */}
         {!open && (
           <div
-            className="absolute -top-1 -right-1 w-5 h-5 rounded-full flex items-center justify-center font-bold"
+            className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full flex items-center justify-center font-black"
             style={{
-              background: '#ef4444',
-              fontSize: '9px',
+              background: 'linear-gradient(135deg, #dc2626, #f97316)',
+              fontSize: '10px',
               color: '#fff',
-              boxShadow: '0 0 10px rgba(239,68,68,0.7)',
+              boxShadow: '0 0 14px rgba(239,68,68,0.85)',
               animation: 'pulse 2s ease-in-out infinite',
             }}
           >
