@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Play, ArrowRight, Star, Users, TrendingUp, Phone, Calendar, CheckCircle, MessageSquare } from 'lucide-react'
+import { Star, Users, TrendingUp, Phone, Calendar, CheckCircle, MessageSquare } from 'lucide-react'
 
 const stats = [
   { value: '500+', label: 'Businesses Served', icon: Users,      color: '#22d3ee', bg: 'rgba(34,211,238,0.15)',  border: 'rgba(34,211,238,0.35)',  glow: 'rgba(34,211,238,0.25)'  },
@@ -172,11 +172,6 @@ export default function Hero() {
               >
                 See Your Free Demo
               </a>
-              <a href="#how-it-works" className="outline-btn flex items-center justify-center gap-2">
-                <Play className="w-4 h-4 fill-white flex-shrink-0" />
-                See How It Works
-                <ArrowRight className="w-4 h-4" />
-              </a>
             </div>
 
             {/* Stats */}
@@ -273,31 +268,6 @@ export default function Hero() {
               ))}
             </div>
 
-            <div
-              className="glass-card p-4 mt-6 z-30 relative"
-              style={{ width: 280, borderColor: 'rgba(139,92,246,0.35)', animation: 'float 5s ease-in-out infinite' }}
-            >
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
-                  <span className="text-green-400 text-xs font-semibold tracking-wider">AI ACTIVE</span>
-                </div>
-                <span className="text-slate-500 text-xs">00:02:34</span>
-              </div>
-              <div className="text-xs text-slate-300 mb-2 leading-relaxed">
-                <span className="text-violet-400 font-semibold">AI: </span>
-                "What date works best for your appointment?"
-              </div>
-              <div className="flex items-end gap-0.5 h-4 justify-center">
-                {[...Array(14)].map((_, idx) => (
-                  <div key={idx} className="wave-bar" style={{ animationDelay: `${(idx % 8) * 0.1}s`, width: '2.5px' }} />
-                ))}
-              </div>
-              <div className="mt-2 pt-2 border-t border-white/10 flex items-center justify-between text-xs text-slate-500">
-                <span>Call routed</span>
-                <span className="text-cyan-400 font-semibold">Booking in progress…</span>
-              </div>
-            </div>
           </div>
 
         </div>

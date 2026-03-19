@@ -90,7 +90,7 @@ export default function ChatWidget() {
         }, 1500)
       }
     }
-    const first = setTimeout(fire, 9000)
+    const first = setTimeout(fire, 5000)
     const interval = setInterval(fire, 22000)
     return () => { clearTimeout(first); clearInterval(interval) }
   }, [open])
