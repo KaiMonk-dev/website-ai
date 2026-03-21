@@ -8,7 +8,7 @@ const industries = [
 
 const callVolumes = ['< 50 calls/mo', '50–200 calls/mo', '200–500 calls/mo', '500+ calls/mo']
 
-const FORMSPREE_ENDPOINT = 'https://formspree.io/ascensionfirstai@gmail.com'
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xwvrzjgo'
 
 export default function Contact() {
   const [step, setStep] = useState(1)
