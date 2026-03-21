@@ -35,7 +35,7 @@ export default function MobileStickyBar() {
           Book Free Strategy Call
         </a>
         <a
-          href="tel:+16193337864"
+          href="tel:+18584347041"
           className="flex items-center justify-center w-12 h-12 rounded-xl flex-shrink-0"
           style={{
             background: 'rgba(34,211,238,0.15)',

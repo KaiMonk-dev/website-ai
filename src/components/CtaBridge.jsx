@@ -37,7 +37,7 @@ export default function CtaBridge() {
               <ArrowRight className="w-4 h-4" />
             </a>
             <a
-              href="tel:+1-800-000-0000"
+              href="tel:+18584347041"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold text-slate-300 hover:text-white transition-colors"
               style={{ background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)' }}
             >
