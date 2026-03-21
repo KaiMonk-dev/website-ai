@@ -48,10 +48,10 @@ export default function UrgencyBanner() {
     : `${timeLeft.hours}h`
 
   const subtext = timeLeft.days === 0
-    ? 'Closes tonight — grab your spot before it\'s gone.'
+    ? 'Closes Tonight — Grab Your Spot Before It\'s Gone.'
     : timeLeft.days === 1
-    ? 'Closes tomorrow — don\'t miss your window this week.'
-    : `Free calls close Friday. Book before your spot fills.`
+    ? 'Closes Tomorrow — Don\'t Miss Your Window This Week.'
+    : 'Free Calls Close Friday. Book Before Your Spot Fills.'
 
   return (
     <div
@@ -91,15 +91,15 @@ export default function UrgencyBanner() {
           </div>
 
           {/* Countdown */}
-          <div className="flex items-baseline gap-2 mb-1">
+          <div className="mb-1">
             <span
-              className="text-4xl font-black leading-none tabular-nums"
+              className="text-4xl font-black leading-none tabular-nums block"
               style={{ color: '#ef4444', textShadow: '0 0 20px rgba(239,68,68,0.7)' }}
             >
               {countDisplay}
             </span>
             <span className="text-white font-bold text-base leading-snug">
-              left to book<br />your free call
+              Left to Book Your Free Call
             </span>
           </div>
 
