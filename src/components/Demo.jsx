@@ -43,7 +43,7 @@ export default function Demo() {
             {/* Phone CTA — pulse rings + "Tap to call" label on mobile */}
             <div className="flex flex-col items-center gap-3 mb-10">
               <a
-                href="tel:+16193337864"
+                href="tel:+18584347041"
                 className="inline-flex items-center gap-3 px-10 py-5 rounded-2xl text-2xl font-bold text-white transition-all duration-300 hover:scale-105"
                 style={{
                   background: 'linear-gradient(135deg, #7c3aed, #3b82f6)',
@@ -69,7 +69,7 @@ export default function Demo() {
                   />
                   <Phone className="relative w-7 h-7" />
                 </div>
-                +1 (619) 333-7864
+                +1 (858) 434-7041
               </a>
               {/* "Tap to call" label — prominent on mobile */}
               <span className="md:hidden text-cyan-400 text-sm font-semibold animate-pulse flex items-center gap-1.5">

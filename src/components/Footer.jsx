@@ -75,8 +75,8 @@ export default function Footer() {
               </p>
               {/* Contact details */}
               <div className="space-y-2 mb-5">
-                <a href="tel:+16193337864" className="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-300 transition-colors">
-                  <Phone className="w-3.5 h-3.5 text-cyan-500" />+1 (619) 333-7864
+                <a href="tel:+18584347041" className="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-300 transition-colors">
+                  <Phone className="w-3.5 h-3.5 text-cyan-500" />+1 (858) 434-7041
                 </a>
                 <a href="mailto:hello@ascensionfirstai.com" className="flex items-center gap-2 text-xs text-slate-500 hover:text-slate-300 transition-colors">
                   <Mail className="w-3.5 h-3.5 text-purple-400" />hello@ascensionfirstai.com

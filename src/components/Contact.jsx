@@ -121,7 +121,7 @@ export default function Contact() {
             <div className="glass-card p-6 space-y-4">
               <h3 className="text-white font-semibold mb-2">Contact Us Directly</h3>
               {[
-                { icon: Phone, text: '+1 (619) 333-7864', href: 'tel:+16193337864' },
+                { icon: Phone, text: '+1 (858) 434-7041', href: 'tel:+18584347041' },
                 { icon: Mail,  text: 'ascensionfirst.ai@gmail.com', href: 'mailto:ascensionfirst.ai@gmail.com' },
                 { icon: MapPin, text: 'United States', href: '#' },
               ].map(({ icon: Icon, text, href }) => (

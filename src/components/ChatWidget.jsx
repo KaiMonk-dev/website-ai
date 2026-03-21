@@ -14,8 +14,8 @@ const actions = [
   {
     icon: Phone,
     label: 'Call us now',
-    sub: '+1 (619) 333-7864',
-    href: 'tel:+16193337864',
+    sub: '+1 (858) 434-7041',
+    href: 'tel:+18584347041',
     color: '#22d3ee',
     bg: 'rgba(34,211,238,0.15)',
     external: false,
@@ -304,12 +304,12 @@ export default function ChatWidget() {
                     Book My Free Strategy Call
                   </a>
                   <a
-                    href="tel:+16193337864"
+                    href="tel:+18584347041"
                     className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold text-slate-400 hover:text-white transition-colors"
                     style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}
                   >
                     <Phone className="w-3 h-3" />
-                    Or call +1 (619) 333-7864
+                    Or call +1 (858) 434-7041
                   </a>
                 </div>
               </div>
