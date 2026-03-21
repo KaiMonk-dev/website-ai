@@ -50,7 +50,7 @@ const faqs = [
   {
     q: 'Can I cancel anytime?',
     pattern: /cancel|contract|lock.?in|commitment|refund|money.?back|guarantee|stuck/i,
-    a: 'Yes — no contracts, no lock-ins. Cancel anytime with 30 days notice. We also back every plan with a 30-day money-back guarantee.',
+    a: 'Yes — no contracts, no lock-ins. Cancel anytime. We also back every plan with a 30-day money-back guarantee.',
   },
   {
     q: 'Is it HIPAA compliant?',
