@@ -1,18 +1,40 @@
 import { useState, useEffect } from 'react'
 import { X, Calendar, Flame } from 'lucide-react'
 
+function getTimeUntilFriday() {
+  const now = new Date()
+  const day = now.getDay() // 0=Sun, 5=Fri, 6=Sat
+  // Target: this Friday at 11:59 PM. If it's Sat/Sun, target next Friday.
+  const daysUntilFriday = day <= 5 ? 5 - day : 7 - day + 5
+  const friday = new Date(now)
+  friday.setDate(now.getDate() + daysUntilFriday)
+  friday.setHours(23, 59, 59, 999)
+
+  const diff = friday - now
+  const totalHours = Math.floor(diff / (1000 * 60 * 60))
+  const days = Math.floor(totalHours / 24)
+  const hours = totalHours % 24
+
+  return { days, hours, totalHours }
+}
+
 export default function UrgencyBanner() {
   const [visible, setVisible] = useState(false)
   const [dismissed, setDismissed] = useState(
     () => typeof sessionStorage !== 'undefined' && sessionStorage.getItem('banner_dismissed') === '1'
   )
+  const [timeLeft, setTimeLeft] = useState(getTimeUntilFriday)
 
   useEffect(() => {
     if (dismissed) return
-    // Fire at 12s — chat widget wiggle is at 5s, enough separation
     const t = setTimeout(() => setVisible(true), 12000)
     return () => clearTimeout(t)
   }, [dismissed])
+
+  useEffect(() => {
+    const interval = setInterval(() => setTimeLeft(getTimeUntilFriday()), 60000)
+    return () => clearInterval(interval)
+  }, [])
 
   if (dismissed) return null
 
@@ -20,6 +42,16 @@ export default function UrgencyBanner() {
     sessionStorage.setItem('banner_dismissed', '1')
     setDismissed(true)
   }
+
+  const countDisplay = timeLeft.days > 0
+    ? `${timeLeft.days}d ${timeLeft.hours}h`
+    : `${timeLeft.hours}h`
+
+  const subtext = timeLeft.days === 0
+    ? 'Closes tonight — grab your spot before it\'s gone.'
+    : timeLeft.days === 1
+    ? 'Closes tomorrow — don\'t miss your window this week.'
+    : `Free calls close Friday. Book before your spot fills.`
 
   return (
     <div
@@ -53,26 +85,26 @@ export default function UrgencyBanner() {
               className="text-xs font-black tracking-widest uppercase"
               style={{ color: '#f97316', letterSpacing: '0.12em' }}
             >
-              Urgent
+              This Week Only
             </span>
             <span className="flex-1 h-px" style={{ background: 'rgba(239,68,68,0.25)' }} />
           </div>
 
-          {/* Slots remaining */}
+          {/* Countdown */}
           <div className="flex items-baseline gap-2 mb-1">
             <span
-              className="text-4xl font-black leading-none"
+              className="text-4xl font-black leading-none tabular-nums"
               style={{ color: '#ef4444', textShadow: '0 0 20px rgba(239,68,68,0.7)' }}
             >
-              3
+              {countDisplay}
             </span>
             <span className="text-white font-bold text-base leading-snug">
-              onboarding slots<br />left this week
+              left to book<br />your free call
             </span>
           </div>
 
           <p className="text-slate-400 text-xs mb-4 leading-relaxed">
-            Once they're gone, new clients wait 2–4 weeks. Don't lose your spot.
+            {subtext}
           </p>
 
           <a
@@ -86,7 +118,7 @@ export default function UrgencyBanner() {
             }}
           >
             <Calendar className="w-3.5 h-3.5" />
-            Reserve My Spot Now →
+            Book My Free Call →
           </a>
         </div>
 

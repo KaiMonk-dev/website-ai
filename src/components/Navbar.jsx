@@ -31,7 +31,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group">
+          <a href="#hero" className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style={{background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)'}}>
               {/* Rising stock ticker with arrowhead */}
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

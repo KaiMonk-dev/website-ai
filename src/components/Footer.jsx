@@ -11,32 +11,30 @@ const links = {
     { label: 'CRM Integration', href: '#features' },
   ],
   Industries: [
-    { label: 'Medical & Dental', href: '#' },
-    { label: 'Law Firms', href: '#' },
-    { label: 'Real Estate', href: '#' },
-    { label: 'Auto Dealerships', href: '#' },
-    { label: 'Home Services', href: '#' },
+    { label: 'Medical & Dental', href: '#how-it-works' },
+    { label: 'Law Firms', href: '#how-it-works' },
+    { label: 'Real Estate', href: '#how-it-works' },
+    { label: 'Auto Dealerships', href: '#how-it-works' },
+    { label: 'Home Services', href: '#how-it-works' },
   ],
   Company: [
-    { label: 'About Us', href: '#' },
-    { label: 'Case Studies', href: '#testimonials' },
-    { label: 'Blog', href: '#' },
-    { label: 'Careers', href: '#' },
+    { label: 'Testimonials', href: '#testimonials' },
+    { label: 'Pricing', href: '#pricing' },
+    { label: 'FAQ', href: '#faq' },
     { label: 'Contact', href: '#contact' },
   ],
   Legal: [
-    { label: 'Privacy Policy', href: '#' },
-    { label: 'Terms of Service', href: '#' },
-    { label: 'HIPAA Compliance', href: '#' },
-    { label: 'Cookie Policy', href: '#' },
+    { label: 'Privacy Policy', href: '#contact' },
+    { label: 'Terms of Service', href: '#contact' },
+    { label: 'HIPAA Compliance', href: '#contact' },
   ],
 }
 
 const socials = [
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Linkedin, href: '#', label: 'LinkedIn' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Facebook, href: '#', label: 'Facebook' },
+  { icon: Twitter, href: 'https://twitter.com/ascensionfirstai', label: 'Twitter' },
+  { icon: Linkedin, href: 'https://linkedin.com/company/ascensionfirstai', label: 'LinkedIn' },
+  { icon: Instagram, href: 'https://instagram.com/ascensionfirstai', label: 'Instagram' },
+  { icon: Facebook, href: 'https://facebook.com/ascensionfirstai', label: 'Facebook' },
 ]
 
 export default function Footer() {
@@ -56,7 +54,7 @@ export default function Footer() {
           <div className="grid grid-cols-2 md:grid-cols-6 gap-8 mb-12">
             {/* Brand column */}
             <div className="col-span-2">
-              <a href="#" className="flex items-center gap-2 mb-4">
+              <a href="#hero" className="flex items-center gap-2 mb-4">
                 <div
                   className="w-9 h-9 rounded-xl flex items-center justify-center"
                   style={{ background: 'linear-gradient(135deg, #8b5cf6, #22d3ee)' }}
